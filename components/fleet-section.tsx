@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Users, Briefcase, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 const fleet = [
   {
+    slug: "toyota-alphard",
     name: "Toyota Alphard AG40",
     category: "luxury-mpv",
     passengers: 6,
@@ -17,6 +19,7 @@ const fleet = [
     features: ["Dual Rear Monitors", "Premium Leather", "Ambient Lighting"]
   },
   {
+    slug: "mercedes-s-class",
     name: "Mercedes-Benz S-Class",
     category: "executive",
     passengers: 3,
@@ -26,6 +29,7 @@ const fleet = [
     features: ["Massage Seats", "Burmester Sound", "Executive Rear Package"]
   },
   {
+    slug: "mercedes-e-class",
     name: "Mercedes-Benz E-Class",
     category: "executive",
     passengers: 3,
@@ -35,6 +39,7 @@ const fleet = [
     features: ["Leather Interior", "Dual-Zone Climate", "USB Charging"]
   },
   {
+    slug: "mercedes-v-class",
     name: "Mercedes-Benz V-Class",
     category: "luxury-mpv",
     passengers: 7,
@@ -44,6 +49,7 @@ const fleet = [
     features: ["Captain Seats", "Panoramic Roof", "Rear Climate Zone"]
   },
   {
+    slug: "toyota-hiace",
     name: "13-Seater Toyota Hiace",
     category: "group",
     passengers: 13,
@@ -53,6 +59,7 @@ const fleet = [
     features: ["Air Conditioning", "Ample Boot Space", "Reclining Seats"]
   },
   {
+    slug: "40-seater-bus",
     name: "40-Seater Coach",
     category: "group",
     passengers: 40,
@@ -156,12 +163,15 @@ export function FleetSection() {
                     </span>
                   ))}
                 </div>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  asChild
+                  variant="ghost"
                   className="p-0 h-auto text-primary hover:text-primary/80 hover:bg-transparent group/btn"
                 >
-                  View Details
-                  <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/btn:translate-x-1" />
+                  <Link href={`/fleet/${vehicle.slug}`}>
+                    View Details
+                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/btn:translate-x-1" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
