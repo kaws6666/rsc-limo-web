@@ -1,0 +1,533 @@
+/* ============================================================
+   RSC LIMO — Custom Styles
+   To edit: ssh rsclimo → nano ~/public_html/wp-content/themes/hello-elementor-child/custom.css
+   Changes go live immediately on next page load (cache auto-busted via filemtime).
+   ============================================================ */
+
+/* --- Brand Variables ---
+   Update these 4 lines if the brand palette ever changes.
+   rgba() variants below (e.g. rgba(201,165,90,0.55)) are gold/ivory with opacity — update manually.
+   ---------------------------------------------------------------- */
+:root {
+  --rsc-navy:   #0D1B3E;
+  --rsc-gold:   #C9A55A;
+  --rsc-ivory:  #FAFAF7;
+  --rsc-footer: #07101C;
+}
+
+
+/* ================================================================
+   GLOBAL — Buttons, Typography
+   ================================================================ */
+
+/* Contact page: WhatsApp button → brand gold */
+[data-id="ct2whatsapp"] .elementor-button {
+  background-color: var(--rsc-gold) !important;
+  color: var(--rsc-footer) !important;
+  border-color: var(--rsc-gold) !important;
+}
+[data-id="ct2whatsapp"] .elementor-button:hover {
+  background-color: #b8924a !important;
+  border-color: #b8924a !important;
+  color: var(--rsc-footer) !important;
+}
+
+/* Contact page: Form submit button → brand gold */
+[data-id="ct2form"] .elementor-button,
+[data-id="ct2form"] input[type="submit"],
+.elementor-page-643 .wpforms-submit,
+.elementor-page-643 button[type="submit"] {
+  background-color: var(--rsc-gold) !important;
+  color: var(--rsc-footer) !important;
+  border-color: var(--rsc-gold) !important;
+  font-weight: 600 !important;
+}
+.elementor-page-643 .wpforms-submit:hover,
+[data-id="ct2form"] .elementor-button:hover {
+  background-color: #b8924a !important;
+  border-color: #b8924a !important;
+}
+
+/* About Us: footer heading override → Playfair 500 gold */
+.elementor-page-608 [data-id="ftr1h2a"] .elementor-heading-title,
+.elementor-page-608 [data-id="ftr1h3a"] .elementor-heading-title {
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 500 !important;
+  color: var(--rsc-gold) !important;
+}
+
+/* Testimonials: reviewer names → Inter 500 */
+[data-id="tm3n1"] .elementor-heading-title,
+[data-id="tm3n2"] .elementor-heading-title,
+[data-id="tm3n3"] .elementor-heading-title {
+  font-weight: 500 !important;
+  font-family: Inter, sans-serif !important;
+}
+
+/* Testimonials: "Verified Google Review" badge → 14px */
+[data-id="tm3r1"] .elementor-heading-title,
+[data-id="tm3r2"] .elementor-heading-title,
+[data-id="tm3r3"] .elementor-heading-title {
+  font-size: 14px !important;
+  color: rgba(250,250,247,0.50) !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Testimonials + Contact: gold-bar one-liner → Inter 500 */
+[data-id="tm2s001"] .elementor-heading-title,
+[data-id="ct4s001"] .elementor-heading-title {
+  font-weight: 500 !important;
+  font-family: Inter, sans-serif !important;
+}
+
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+
+[data-id="ftr2s001"] {
+  background-color: var(--rsc-footer) !important;
+}
+
+
+/* ================================================================
+   VEHICLE PHOTO / GALLERY
+   ================================================================ */
+
+.rsc-vehicle-photo,
+.rsc-gallery-img {
+  mix-blend-mode: normal !important;
+}
+
+
+/* ================================================================
+   SERVICES PAGE
+   ================================================================ */
+
+/* Service card backgrounds → ivory */
+[data-id="00001395"],[data-id="0000139d"],[data-id="000013a5"],
+[data-id="000013ae"],[data-id="000013b6"],[data-id="000013d0"],
+[data-id="000013d8"],[data-id="000013e0"],[data-id="000013e9"],
+[data-id="000013f1"] {
+  background-color: var(--rsc-ivory) !important;
+}
+
+/* Weddings card → ivory bg, navy text */
+[data-id="000013be"] {
+  background-color: var(--rsc-ivory) !important;
+}
+[data-id="000013be"] .elementor-heading-title,
+[data-id="000013be"] h1,[data-id="000013be"] h2,
+[data-id="000013be"] h3,[data-id="000013be"] h4,
+[data-id="000013be"] p,[data-id="000013be"] a {
+  color: var(--rsc-navy) !important;
+}
+
+/* Corporate Account card → ivory bg, navy text */
+[data-id="000013f9"] {
+  background-color: var(--rsc-ivory) !important;
+}
+[data-id="000013f9"] .elementor-heading-title,
+[data-id="000013f9"] h1,[data-id="000013f9"] h2,
+[data-id="000013f9"] h3,[data-id="000013f9"] h4,
+[data-id="000013f9"] p,[data-id="000013f9"] a {
+  color: var(--rsc-navy) !important;
+}
+
+/* All 12 service cards → uniform min-height */
+[data-id="00001395"],[data-id="0000139d"],[data-id="000013a5"],
+[data-id="000013ae"],[data-id="000013b6"],[data-id="000013d0"],
+[data-id="000013d8"],[data-id="000013e0"],[data-id="000013e9"],
+[data-id="000013f1"],[data-id="000013be"],[data-id="000013f9"] {
+  min-height: 380px !important;
+  box-sizing: border-box !important;
+}
+
+
+/* ================================================================
+   HOMEPAGE FLEET CARDS
+   ================================================================ */
+
+/* Equalise all 6 columns to 1/6 width */
+[data-id="00000c2d"],
+[data-id="00000c35"],
+[data-id="00000c3d"],
+[data-id="00000c45"],
+[data-id="00000c4d"],
+[data-id="6dbd17e"] {
+  flex: 1 1 0% !important;
+  width: 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+/* Inner card sections: full width + equal min-height */
+[data-id="00000c2c"],
+[data-id="00000c34"],
+[data-id="00000c3c"],
+[data-id="00000c44"],
+[data-id="00000c4c"],
+[data-id="2bb7eaf"] {
+  width: 100% !important;
+  min-height: 480px !important;
+  box-sizing: border-box !important;
+}
+
+/* Card inner content: consistent padding, flex column layout */
+[data-id="00000c2c"] .elementor-widget-wrap,
+[data-id="00000c34"] .elementor-widget-wrap,
+[data-id="00000c3c"] .elementor-widget-wrap,
+[data-id="00000c44"] .elementor-widget-wrap,
+[data-id="00000c4c"] .elementor-widget-wrap,
+[data-id="2bb7eaf"] .elementor-widget-wrap {
+  padding: 40px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Fleet card description zone → uniform min-height */
+[data-id="00000c27"],[data-id="00000c2f"],[data-id="00000c37"],
+[data-id="00000c3f"],[data-id="00000c47"],[data-id="c85b823"] {
+  min-height: 180px !important;
+}
+
+
+/* ================================================================
+   VEHICLE PAGES (Alphard, S-Class, E-Class, V-Class, Hiace, Bus)
+   ================================================================ */
+
+/* All vehicle page headings → Playfair Display 500 */
+.elementor-page-3078 .elementor-heading-title,
+.elementor-page-3073 .elementor-heading-title,
+.elementor-page-3076 .elementor-heading-title,
+.elementor-page-3077 .elementor-heading-title,
+.elementor-page-3074 .elementor-heading-title,
+.elementor-page-3075 .elementor-heading-title {
+  font-weight: 500 !important;
+  font-family: 'Playfair Display', serif !important;
+}
+
+/* Description sections → dark navy */
+[data-id="qa2ynd8"],[data-id="e78mnpz"],[data-id="2ai8p7w"],
+[data-id="z8o2s13"],[data-id="xuvaibi"],[data-id="y7qhbso"] {
+  background-color: var(--rsc-navy) !important;
+}
+[data-id="qa2ynd8"] .elementor-heading-title,
+[data-id="e78mnpz"] .elementor-heading-title,
+[data-id="2ai8p7w"] .elementor-heading-title,
+[data-id="z8o2s13"] .elementor-heading-title,
+[data-id="xuvaibi"] .elementor-heading-title,
+[data-id="y7qhbso"] .elementor-heading-title { color: var(--rsc-ivory) !important; }
+[data-id="qa2ynd8"] .elementor-widget-text-editor p,
+[data-id="e78mnpz"] .elementor-widget-text-editor p,
+[data-id="2ai8p7w"] .elementor-widget-text-editor p,
+[data-id="z8o2s13"] .elementor-widget-text-editor p,
+[data-id="xuvaibi"] .elementor-widget-text-editor p,
+[data-id="y7qhbso"] .elementor-widget-text-editor p {
+  color: rgba(250,250,247,0.70) !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.75 !important;
+}
+[data-id="qa2ynd8"] .elementor-divider-separator,
+[data-id="e78mnpz"] .elementor-divider-separator,
+[data-id="2ai8p7w"] .elementor-divider-separator,
+[data-id="z8o2s13"] .elementor-divider-separator,
+[data-id="xuvaibi"] .elementor-divider-separator,
+[data-id="y7qhbso"] .elementor-divider-separator {
+  border-color: rgba(201,165,90,0.55) !important;
+}
+
+/* Pricing sections → dark navy */
+[data-id="alp_pr1"],[data-id="scs_pr1"],[data-id="ecl_pr1"],
+[data-id="vcl_pr1"],[data-id="min_pr1"],[data-id="cch_pr1"] {
+  background-color: var(--rsc-navy) !important;
+}
+[data-id="alp_pr1"] .elementor-heading-title,
+[data-id="scs_pr1"] .elementor-heading-title,
+[data-id="ecl_pr1"] .elementor-heading-title,
+[data-id="vcl_pr1"] .elementor-heading-title,
+[data-id="min_pr1"] .elementor-heading-title,
+[data-id="cch_pr1"] .elementor-heading-title { color: var(--rsc-ivory) !important; }
+
+/* Pricing table: thead */
+[data-id="alp_pr1"] thead td,[data-id="alp_pr1"] thead th,
+[data-id="scs_pr1"] thead td,[data-id="scs_pr1"] thead th,
+[data-id="ecl_pr1"] thead td,[data-id="ecl_pr1"] thead th,
+[data-id="vcl_pr1"] thead td,[data-id="vcl_pr1"] thead th,
+[data-id="min_pr1"] thead td,[data-id="min_pr1"] thead th,
+[data-id="cch_pr1"] thead td,[data-id="cch_pr1"] thead th {
+  background-color: var(--rsc-navy) !important;
+  color: var(--rsc-gold) !important;
+}
+
+/* Pricing table: tbody — remove Hello Elementor white TR default */
+[data-id="alp_pr1"] tbody tr,
+[data-id="scs_pr1"] tbody tr,
+[data-id="ecl_pr1"] tbody tr,
+[data-id="vcl_pr1"] tbody tr,
+[data-id="min_pr1"] tbody tr,
+[data-id="cch_pr1"] tbody tr {
+  background-color: transparent !important;
+}
+[data-id="alp_pr1"] tbody td,[data-id="scs_pr1"] tbody td,
+[data-id="ecl_pr1"] tbody td,[data-id="vcl_pr1"] tbody td,
+[data-id="min_pr1"] tbody td,[data-id="cch_pr1"] tbody td {
+  background-color: rgba(250,250,247,0.04) !important;
+  color: rgba(250,250,247,0.80) !important;
+  border-color: rgba(201,165,90,0.20) !important;
+}
+[data-id="alp_pr1"] tbody tr:nth-child(even) td,
+[data-id="scs_pr1"] tbody tr:nth-child(even) td,
+[data-id="ecl_pr1"] tbody tr:nth-child(even) td,
+[data-id="vcl_pr1"] tbody tr:nth-child(even) td,
+[data-id="min_pr1"] tbody tr:nth-child(even) td,
+[data-id="cch_pr1"] tbody tr:nth-child(even) td {
+  background-color: rgba(250,250,247,0.08) !important;
+}
+
+/* Pricing table: body text */
+[data-id="alp_pr1"] .elementor-widget-text-editor li,
+[data-id="scs_pr1"] .elementor-widget-text-editor li,
+[data-id="ecl_pr1"] .elementor-widget-text-editor li,
+[data-id="vcl_pr1"] .elementor-widget-text-editor li,
+[data-id="min_pr1"] .elementor-widget-text-editor li,
+[data-id="cch_pr1"] .elementor-widget-text-editor li,
+[data-id="alp_pr1"] .elementor-widget-text-editor p,
+[data-id="scs_pr1"] .elementor-widget-text-editor p,
+[data-id="ecl_pr1"] .elementor-widget-text-editor p,
+[data-id="vcl_pr1"] .elementor-widget-text-editor p,
+[data-id="min_pr1"] .elementor-widget-text-editor p,
+[data-id="cch_pr1"] .elementor-widget-text-editor p {
+  color: rgba(250,250,247,0.70) !important;
+}
+[data-id="alp_pr1"] .elementor-widget-text-editor strong,
+[data-id="scs_pr1"] .elementor-widget-text-editor strong,
+[data-id="ecl_pr1"] .elementor-widget-text-editor strong,
+[data-id="vcl_pr1"] .elementor-widget-text-editor strong,
+[data-id="min_pr1"] .elementor-widget-text-editor strong,
+[data-id="cch_pr1"] .elementor-widget-text-editor strong {
+  color: rgba(250,250,247,0.90) !important;
+}
+[data-id="alp_pr1"] .elementor-divider-separator,
+[data-id="scs_pr1"] .elementor-divider-separator,
+[data-id="ecl_pr1"] .elementor-divider-separator,
+[data-id="vcl_pr1"] .elementor-divider-separator,
+[data-id="min_pr1"] .elementor-divider-separator,
+[data-id="cch_pr1"] .elementor-divider-separator {
+  border-color: rgba(201,165,90,0.55) !important;
+}
+
+/* CTA sections → dark navy */
+[data-id="1f79045"],[data-id="uugswlh"],[data-id="awd07zp"],
+[data-id="mnc4g30"],[data-id="lwqio1f"],[data-id="4lc359r"] {
+  background-color: var(--rsc-navy) !important;
+}
+[data-id="1f79045"] .elementor-heading-title,
+[data-id="uugswlh"] .elementor-heading-title,
+[data-id="awd07zp"] .elementor-heading-title,
+[data-id="mnc4g30"] .elementor-heading-title,
+[data-id="lwqio1f"] .elementor-heading-title,
+[data-id="4lc359r"] .elementor-heading-title { color: var(--rsc-ivory) !important; }
+[data-id="1f79045"] .elementor-widget-text-editor p,
+[data-id="uugswlh"] .elementor-widget-text-editor p,
+[data-id="awd07zp"] .elementor-widget-text-editor p,
+[data-id="mnc4g30"] .elementor-widget-text-editor p,
+[data-id="lwqio1f"] .elementor-widget-text-editor p,
+[data-id="4lc359r"] .elementor-widget-text-editor p {
+  color: rgba(250,250,247,0.65) !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+
+/* ================================================================
+   ABOUT US PAGE
+   ================================================================ */
+
+/* Company logo: cap at 200px, no pixelation */
+[data-id="ab3img"] img {
+  max-width: 200px !important;
+  width: auto !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* ================================================================
+   CONTACT PAGE
+   ================================================================ */
+
+/* Left column: consistent padding */
+[data-id="ct2c1"] > .elementor-widget-wrap {
+  padding: 60px 40px 60px 80px !important;
+}
+
+/* Icon list: uniform indent so all 5 items align */
+[data-id="ct2info"] .elementor-icon-list-icon {
+  width: 28px !important;
+  min-width: 28px !important;
+  flex-shrink: 0 !important;
+}
+[data-id="ct2info"] .elementor-icon-list-item {
+  align-items: flex-start !important;
+}
+[data-id="ct2info"] .elementor-icon-list-text {
+  padding-left: 8px !important;
+}
+
+/* Form inputs: proper padding (was 0px — squeezy) */
+[data-id="ct2form"] input[type="text"],
+[data-id="ct2form"] input[type="email"],
+[data-id="ct2form"] input[type="tel"],
+[data-id="ct2form"] input[type="number"] {
+  padding: 10px 14px !important;
+  box-sizing: border-box !important;
+}
+[data-id="ct2form"] .choices__inner {
+  padding: 10px 14px !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+}
+[data-id="ct2form"] .choices__list--single {
+  padding: 0 !important;
+}
+
+
+/* ================================================================
+   HEADER — Desktop
+   ================================================================ */
+
+/* Hide the WordPress page title (Hello Elementor theme renders this — Elementor covers it) */
+.page-header {
+  display: none !important;
+}
+
+/* Desktop logo: constrain to fit header height without overflowing */
+[data-id="2e24017"] img {
+  max-width: 160px !important;
+  width: 160px !important;
+  height: auto !important;
+}
+
+
+/* ================================================================
+   MOBILE RESPONSIVE — ≤1024px
+   ================================================================ */
+
+@media (max-width: 1024px) {
+
+  /* Sticky header: prevent overflow clipping */
+  .elementor-sticky--effects,
+  .elementor-sticky--effects .elementor-widget-wrap,
+  .elementor-sticky--effects .elementor-container {
+    overflow: visible !important;
+  }
+
+  /* Mobile header: logo widget tap + pointer events */
+  [data-id="35e7c38"] {
+    position: relative !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+  [data-id="35e7c38"] a {
+    display: block !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+  [data-id="35e7c38"] img {
+    max-width: 110px !important;
+    pointer-events: auto !important;
+  }
+
+  /* Mobile logo widget: 90px */
+  [data-id="fbc780f"] img {
+    max-width: 90px !important;
+    width: 90px !important;
+  }
+
+  /* Mobile header layout: hide icons, logo left, hamburger right */
+  [data-id="4f8f22d3"] {
+    display: none !important;
+  }
+  [data-id="461a1829"] {
+    flex: 1 1 auto !important;
+  }
+  [data-id="111e1a72"] {
+    flex: 0 0 auto !important;
+  }
+
+}
+
+
+/* ================================================================
+   MOBILE RESPONSIVE — ≤767px
+   ================================================================ */
+
+@media (max-width: 767px) {
+
+  /* Homepage fleet row: allow columns to wrap */
+  [data-id="00000c4e"] .elementor-container {
+    flex-wrap: wrap !important;
+  }
+
+  /* Homepage fleet: 2-per-row */
+  [data-id="00000c2d"],
+  [data-id="00000c35"],
+  [data-id="00000c3d"],
+  [data-id="00000c45"],
+  [data-id="00000c4d"],
+  [data-id="6dbd17e"] {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    min-width: 0 !important;
+  }
+
+  /* Homepage fleet: reduce card height on mobile */
+  [data-id="00000c2c"],
+  [data-id="00000c34"],
+  [data-id="00000c3c"],
+  [data-id="00000c44"],
+  [data-id="00000c4c"],
+  [data-id="2bb7eaf"] {
+    min-height: 280px !important;
+  }
+
+  /* Generic col-25 / col-33 wrapping */
+  .elementor-section .elementor-col-25,
+  .elementor-section .elementor-col-33 {
+    width: 50% !important;
+  }
+
+  /* Our Fleet page: allow rows to wrap */
+  [data-id="00001b7d"] .elementor-container,
+  [data-id="00001b9c"] .elementor-container {
+    flex-wrap: wrap !important;
+  }
+
+  /* Our Fleet: 1-per-row */
+  [data-id="00001b68"],
+  [data-id="00001b72"],
+  [data-id="00001b7c"],
+  [data-id="00001b87"],
+  [data-id="00001b91"],
+  [data-id="00001b9b"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    min-height: auto !important;
+  }
+
+  /* Contact page: reset left column padding on mobile */
+  [data-id="ct2c1"] > .elementor-widget-wrap {
+    padding: 40px 24px !important;
+  }
+
+}
