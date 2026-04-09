@@ -5,35 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Phone, Mail, Clock, Send } from "lucide-react"
-
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Call Us",
-    value: "+65 8686 0775",
-    href: "tel:+6586860775",
-  },
-  {
-    icon: Mail,
-    label: "Email Us",
-    value: "hello@rsclimo.com.sg",
-    href: "mailto:hello@rsclimo.com.sg",
-  },
-  {
-    icon: Clock,
-    label: "Operating Hours",
-    value: "24/7, 365 Days",
-    href: "#",
-  },
-  {
-    icon: Phone,
-    label: "WhatsApp",
-    value: "Chat with us",
-    href: "https://wa.me/6586860775",
-  },
-]
+import { useLanguage } from "@/lib/i18n"
 
 export function ContactSection() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,7 +22,8 @@ export function ContactSection() {
     e.preventDefault()
     setStatus("sending")
     try {
-      const res = await fetch("https://formspree.io/f/placeholder", {
+      const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -63,19 +39,25 @@ export function ContactSection() {
     }
   }
 
+  const contactInfo = [
+    { icon: Phone, label: t.contact.callUs, value: "+65 8686 0775", href: "tel:+6586860775" },
+    { icon: Mail, label: t.contact.emailUs, value: "hello@rsclimo.com.sg", href: "mailto:hello@rsclimo.com.sg" },
+    { icon: Clock, label: t.contact.hours, value: t.contact.hoursValue, href: "#" },
+    { icon: Phone, label: t.contact.whatsapp, value: t.contact.whatsappValue, href: "https://wa.me/6586860775" },
+  ]
+
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="text-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
-            Get In Touch
+            {t.contact.badge}
           </p>
           <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-6 text-balance">
-            Ready to Experience Luxury?
+            {t.contact.title}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Contact us for a personalised quote or to learn more about our
-            corporate and individual transportation solutions.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -84,20 +66,20 @@ export function ContactSection() {
           <Card className="bg-card border-border">
             <CardContent className="p-8">
               <h3 className="font-serif text-2xl font-medium text-foreground mb-6">
-                Request a Quote
+                {t.contact.formTitle}
               </h3>
               {status === "sent" ? (
                 <div className="text-center py-12">
-                  <p className="text-primary text-2xl font-serif mb-3">Thank you!</p>
-                  <p className="text-muted-foreground">We&apos;ll be in touch shortly.</p>
+                  <p className="text-primary text-2xl font-serif mb-3">{t.contact.thankYou}</p>
+                  <p className="text-muted-foreground">{t.contact.thankYouSub}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Full Name</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t.contact.labelName}</label>
                       <Input
-                        placeholder="John Doe"
+                        placeholder={t.contact.placeholderName}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="bg-secondary border-border focus:border-primary"
@@ -105,10 +87,10 @@ export function ContactSection() {
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Email</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t.contact.labelEmail}</label>
                       <Input
                         type="email"
-                        placeholder="john@company.com"
+                        placeholder={t.contact.placeholderEmail}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="bg-secondary border-border focus:border-primary"
@@ -118,35 +100,35 @@ export function ContactSection() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Phone Number</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t.contact.labelPhone}</label>
                       <Input
-                        placeholder="+65 9123 4567"
+                        placeholder={t.contact.placeholderPhone}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="bg-secondary border-border focus:border-primary"
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Service Type</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t.contact.labelService}</label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         className="w-full h-10 px-3 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                       >
-                        <option value="">Select a service</option>
-                        <option value="airport">Airport Transfer</option>
-                        <option value="corporate">Corporate Travel</option>
-                        <option value="events">Events &amp; Weddings</option>
-                        <option value="group">Group Transport</option>
-                        <option value="tour">City Tours</option>
-                        <option value="other">Other</option>
+                        <option value="">{t.contact.selectService}</option>
+                        <option value="airport">{t.contact.serviceAirport}</option>
+                        <option value="corporate">{t.contact.serviceCorporate}</option>
+                        <option value="events">{t.contact.serviceEvents}</option>
+                        <option value="group">{t.contact.serviceGroup}</option>
+                        <option value="tour">{t.contact.serviceTour}</option>
+                        <option value="other">{t.contact.serviceOther}</option>
                       </select>
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-2 block">Message</label>
+                    <label className="text-sm text-muted-foreground mb-2 block">{t.contact.labelMessage}</label>
                     <textarea
-                      placeholder="Tell us about your transportation needs..."
+                      placeholder={t.contact.placeholderMessage}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={4}
@@ -154,7 +136,7 @@ export function ContactSection() {
                     />
                   </div>
                   {status === "error" && (
-                    <p className="text-destructive text-sm">Something went wrong. Please email us directly.</p>
+                    <p className="text-destructive text-sm">{t.contact.errorMsg}</p>
                   )}
                   <Button
                     type="submit"
@@ -162,7 +144,7 @@ export function ContactSection() {
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6"
                   >
                     <Send className="w-4 h-4 mr-2" />
-                    {status === "sending" ? "Sending..." : "Send Inquiry"}
+                    {status === "sending" ? t.contact.sendingBtn : t.contact.sendBtn}
                   </Button>
                 </form>
               )}
@@ -179,10 +161,7 @@ export function ContactSection() {
                       <item.icon className="w-6 h-6 text-primary" />
                     </div>
                     <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-                    <a
-                      href={item.href}
-                      className="text-foreground font-medium hover:text-primary transition-colors"
-                    >
+                    <a href={item.href} className="text-foreground font-medium hover:text-primary transition-colors">
                       {item.value}
                     </a>
                   </CardContent>
@@ -194,31 +173,24 @@ export function ContactSection() {
             <Card className="bg-primary border-0">
               <CardContent className="p-8">
                 <h3 className="font-serif text-2xl font-medium text-primary-foreground mb-4">
-                  Corporate Account Benefits
+                  {t.contact.corporateTitle}
                 </h3>
                 <ul className="space-y-3 text-primary-foreground/90 mb-6">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary-foreground mt-1">•</span>
-                    <span>Preferential rates and priority booking</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary-foreground mt-1">•</span>
-                    <span>Dedicated account manager</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary-foreground mt-1">•</span>
-                    <span>Consolidated monthly billing</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary-foreground mt-1">•</span>
-                    <span>Custom fleet allocation</span>
-                  </li>
+                  {t.contact.corporateBullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-2">
+                      <span className="text-primary-foreground mt-1">•</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
                 </ul>
                 <Button
+                  asChild
                   variant="secondary"
                   className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                 >
-                  Inquire About Corporate Rates
+                  <a href="mailto:hello@rsclimo.com.sg?subject=Corporate%20Account%20Inquiry">
+                    {t.contact.corporateBtn}
+                  </a>
                 </Button>
               </CardContent>
             </Card>

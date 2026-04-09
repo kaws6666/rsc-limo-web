@@ -3,15 +3,10 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Phone } from "lucide-react"
-
-const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#fleet", label: "Our Fleet" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-]
+import { useLanguage } from "@/lib/i18n"
 
 export function Header() {
+  const { lang, setLang, t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -22,6 +17,13 @@ export function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const navLinks = [
+    { href: "#services", label: t.nav.services },
+    { href: "#fleet", label: t.nav.fleet },
+    { href: "#about", label: t.nav.about },
+    { href: "#contact", label: t.nav.contact },
+  ]
 
   return (
     <header
@@ -55,14 +57,37 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons + Lang Switcher */}
           <div className="hidden md:flex items-center gap-4">
+            {/* Language switcher */}
+            <div className="flex items-center gap-1 border border-border rounded-md overflow-hidden text-xs">
+              <button
+                onClick={() => setLang("en")}
+                className={`px-2.5 py-1.5 transition-colors ${
+                  lang === "en"
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLang("zh")}
+                className={`px-2.5 py-1.5 transition-colors ${
+                  lang === "zh"
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                中文
+              </button>
+            </div>
             <a href="tel:+6586860775" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
               <span className="text-sm">+65 8686 0775</span>
             </a>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Get Quote
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <a href="#contact">{t.nav.getQuote}</a>
             </Button>
           </div>
 
@@ -89,8 +114,34 @@ export function Header() {
                   {link.label}
                 </a>
               ))}
-              <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
-                Get Quote
+              {/* Mobile lang switcher */}
+              <div className="flex items-center gap-2 pt-2">
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Language:</span>
+                <div className="flex items-center gap-1 border border-border rounded-md overflow-hidden text-xs">
+                  <button
+                    onClick={() => setLang("en")}
+                    className={`px-2.5 py-1.5 transition-colors ${
+                      lang === "en"
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => setLang("zh")}
+                    className={`px-2.5 py-1.5 transition-colors ${
+                      lang === "zh"
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    中文
+                  </button>
+                </div>
+              </div>
+              <Button asChild className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
+                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.getQuote}</a>
               </Button>
             </nav>
           </div>

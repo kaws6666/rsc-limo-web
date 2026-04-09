@@ -1,13 +1,13 @@
-import { Shield, Clock, Award, Users } from "lucide-react"
+"use client"
 
-const stats = [
-  { icon: Clock, value: "24/7", label: "Service Availability" },
-  { icon: Users, value: "500+", label: "Corporate Clients" },
-  { icon: Award, value: "10+", label: "Years Experience" },
-  { icon: Shield, value: "100%", label: "Safety Record" },
-]
+import { Shield, Clock, Award, Users } from "lucide-react"
+import { useLanguage } from "@/lib/i18n"
+
+const statIcons = [Clock, Users, Award, Shield]
 
 export function AboutSection() {
+  const { t } = useLanguage()
+
   return (
     <section id="about" className="py-24 bg-secondary">
       <div className="container mx-auto px-6">
@@ -32,7 +32,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <p className="text-3xl font-serif font-medium text-foreground">10+</p>
-                  <p className="text-muted-foreground text-sm">Years of Excellence</p>
+                  <p className="text-muted-foreground text-sm">{t.about.yearsOverlay}</p>
                 </div>
               </div>
             </div>
@@ -41,38 +41,36 @@ export function AboutSection() {
           {/* Content Side */}
           <div>
             <p className="text-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
-              About Royal Stallion Chauffeurs
+              {t.about.badge}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-6 leading-tight">
-              Singapore&apos;s Trusted
+              {t.about.title1}
               <br />
-              <span className="text-primary">Chauffeur Partner</span>
+              <span className="text-primary">{t.about.title2}</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              Royal Stallion Chauffeurs is Singapore&apos;s premier luxury ground transportation service.
-              Our commitment to excellence, punctuality, and discretion has earned us the trust of
-              corporate clients, government agencies, and discerning individuals across the island.
+              {t.about.para1}
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Every journey with us is crafted with meticulous attention to detail.
-              Our professionally trained chauffeurs, immaculately maintained vehicles,
-              and round-the-clock availability ensure you arrive in style — whether
-              it&apos;s an airport transfer at dawn or a gala event in the evening.
+              {t.about.para2}
             </p>
 
-            {/* Key Points */}
+            {/* Stats */}
             <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <stat.icon className="w-6 h-6 text-primary" />
+              {t.about.stats.map((stat, i) => {
+                const Icon = statIcons[i]
+                return (
+                  <div key={stat.label} className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-serif font-medium text-foreground">{stat.value}</p>
+                      <p className="text-muted-foreground text-sm">{stat.label}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-2xl font-serif font-medium text-foreground">{stat.value}</p>
-                    <p className="text-muted-foreground text-sm">{stat.label}</p>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

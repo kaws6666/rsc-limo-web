@@ -1,40 +1,45 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
+import { useLanguage } from "@/lib/i18n"
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "Managing Director, Tech Corp",
-    content: "Elite Limousine has been our trusted transportation partner for over 5 years. Their professionalism and reliability are unmatched. Every executive who visits Singapore is impressed by the service quality.",
-    rating: 5
+    name: "David Lim",
+    role: "Managing Director",
+    content: "Royal Stallion has been our go-to for executive transfers for years. Every chauffeur is professional, punctual, and discreet — exactly what we need when hosting overseas clients.",
+    rating: 5,
   },
   {
-    name: "Michael Tan",
+    name: "Michelle Tan",
     role: "Event Coordinator",
-    content: "We used Elite for our annual company gala with 200+ guests. The coordination was flawless - multiple vehicles, perfectly timed arrivals, and impeccably dressed chauffeurs. Simply outstanding.",
-    rating: 5
+    content: "We booked RSC for our company gala — multiple vehicles, perfectly timed arrivals, impeccably presented chauffeurs. Not a single hiccup across 80 guests. Highly recommended.",
+    rating: 5,
   },
   {
-    name: "Jennifer Lim",
-    role: "Frequent Business Traveler",
-    content: "After a long flight, being greeted by a professional chauffeur with a Mercedes S-Class is the perfect way to start or end my Singapore trips. I wouldn&apos;t book anyone else for airport transfers.",
-    rating: 5
-  }
+    name: "James Wong",
+    role: "Frequent Business Traveller",
+    content: "After a long flight, being greeted by a Royal Stallion chauffeur in a Mercedes S-Class is the perfect way to arrive. I wouldn't use anyone else for airport transfers in Singapore.",
+    rating: 5,
+  },
 ]
 
 export function TestimonialsSection() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="text-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">
-            Testimonials
+            {t.testimonials.badge}
           </p>
           <h2 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-6 text-balance">
-            What Our Clients Say
+            {t.testimonials.title}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Trusted by leading corporations and discerning individuals across Singapore.
+            {t.testimonials.subtitle}
           </p>
         </div>
 
@@ -48,8 +53,8 @@ export function TestimonialsSection() {
                     <Star key={i} className="w-5 h-5 fill-primary text-primary" />
                   ))}
                 </div>
-                
-                {/* Quote */}
+
+                {/* Quote — kept in English as these are real testimonials */}
                 <blockquote className="text-foreground leading-relaxed mb-6">
                   &ldquo;{testimonial.content}&rdquo;
                 </blockquote>
