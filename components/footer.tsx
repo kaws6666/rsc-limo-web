@@ -40,7 +40,7 @@ export function Footer() {
               <img
                 src="/logo.png"
                 alt="Royal Stallion Chauffeurs"
-                className="h-32 w-auto"
+                className="h-20 w-auto"
               />
             </a>
             <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
