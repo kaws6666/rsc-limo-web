@@ -25,7 +25,7 @@ export function AboutSection() {
             <div className="absolute -bottom-3 -right-3 w-full h-full border-2 border-primary/30 rounded-lg" />
 
             {/* Stats overlay card */}
-            <div className="absolute bottom-4 left-4 bg-card border border-border rounded-lg p-6 shadow-xl">
+            <div className="absolute bottom-4 left-4 z-20 bg-card border border-border rounded-lg p-6 shadow-xl">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
                   <Award className="w-8 h-8 text-primary-foreground" />
