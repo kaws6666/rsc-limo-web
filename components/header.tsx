@@ -38,7 +38,7 @@ export function Header() {
             <img
               src="/logo.png"
               alt="Royal Stallion Chauffeurs"
-              className="h-14 w-auto"
+              className="h-20 w-auto"
             />
           </a>
 
