@@ -34,14 +34,12 @@ export function Header() {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-              <span className="font-serif text-primary-foreground text-xl font-bold">R</span>
-            </div>
-            <div>
-              <span className="font-serif text-xl font-medium text-foreground">Royal Stallion</span>
-              <span className="text-primary font-serif text-xl font-medium"> Chauffeurs</span>
-            </div>
+          <a href="#" className="flex items-center">
+            <img
+              src="/logo.jpeg"
+              alt="Royal Stallion Chauffeurs"
+              className="h-14 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}

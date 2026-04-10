@@ -48,7 +48,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/alphard.png",
     photo: "/vehicles/alphard-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -75,7 +75,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/s-class.png",
     photo: "/vehicles/s-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $170" },
       { service: "Airport Transfer (Changi)", rate: "From $170" },
@@ -102,7 +102,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/e-class.png",
     photo: "/vehicles/e-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -129,7 +129,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/v-class.png",
     photo: "/vehicles/v-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -156,7 +156,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/hiace.png",
     photo: "/vehicles/hiace-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -183,7 +183,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/bus.png",
     photo: "/vehicles/bus-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2940&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=1200&auto=format&fit=crop",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "On Request" },
       { service: "Airport Transfer (Changi)", rate: "On Request" },

@@ -36,14 +36,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <a href="#" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-                <span className="font-serif text-primary-foreground text-xl font-bold">R</span>
-              </div>
-              <div>
-                <span className="font-serif text-xl font-medium text-foreground">Royal Stallion</span>
-                <span className="text-primary font-serif text-xl font-medium"> Chauffeurs</span>
-              </div>
+            <a href="#" className="flex items-center mb-6">
+              <img
+                src="/logo.jpeg"
+                alt="Royal Stallion Chauffeurs"
+                className="h-16 w-auto"
+              />
             </a>
             <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
               {t.footer.tagline}
