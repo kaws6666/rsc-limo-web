@@ -15,7 +15,7 @@ export function AboutSection() {
           {/* Image Side */}
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1200&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1603122101829-e56305b0a5f7?q=80&w=1200&auto=format&fit=crop"
               alt="Professional chauffeur opening car door"
               className="rounded-xl w-full h-[520px] object-cover"
             />
