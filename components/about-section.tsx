@@ -13,7 +13,7 @@ export function AboutSection() {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image Side */}
-          <div className="relative">
+          <div className="relative pb-4 pr-3">
             <div className="relative z-10">
               <img
                 src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1200&auto=format&fit=crop"
@@ -22,10 +22,10 @@ export function AboutSection() {
               />
             </div>
             {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-primary/30 rounded-lg" />
+            <div className="absolute -bottom-3 -right-3 w-full h-full border-2 border-primary/30 rounded-lg" />
 
             {/* Stats overlay card */}
-            <div className="absolute -bottom-10 -left-10 bg-card border border-border rounded-lg p-6 shadow-xl">
+            <div className="absolute bottom-4 left-4 bg-card border border-border rounded-lg p-6 shadow-xl">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
                   <Award className="w-8 h-8 text-primary-foreground" />
