@@ -3,7 +3,7 @@
 import { Shield, Clock, Users } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 
-const statIcons = [Clock, Users, Award, Shield]
+const statIcons = [Clock, Users, Clock, Shield]
 
 export function AboutSection() {
   const { t } = useLanguage()
