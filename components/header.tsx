@@ -36,7 +36,7 @@ export function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center">
             <img
-              src="/logo.jpeg"
+              src="/logo.png"
               alt="Royal Stallion Chauffeurs"
               className="h-14 w-auto"
             />

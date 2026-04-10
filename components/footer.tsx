@@ -38,7 +38,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <a href="#" className="flex items-center mb-6">
               <img
-                src="/logo.jpeg"
+                src="/logo.png"
                 alt="Royal Stallion Chauffeurs"
                 className="h-16 w-auto"
               />
