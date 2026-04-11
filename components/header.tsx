@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Phone } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
@@ -9,6 +10,8 @@ export function Header() {
   const { lang, setLang, t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +22,10 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { href: "#services", label: t.nav.services },
-    { href: "#fleet", label: t.nav.fleet },
-    { href: "#about", label: t.nav.about },
-    { href: "#contact", label: t.nav.contact },
+    { href: isHome ? "#services" : "/#services", label: t.nav.services },
+    { href: isHome ? "#fleet" : "/#fleet", label: t.nav.fleet },
+    { href: isHome ? "#about" : "/#about", label: t.nav.about },
+    { href: isHome ? "#contact" : "/#contact", label: t.nav.contact },
   ]
 
   return (
@@ -34,7 +37,7 @@ export function Header() {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <a href={isHome ? "#" : "/"} className="flex items-center">
             <img
               src="/logo.png"
               alt="Royal Stallion Chauffeurs"
@@ -85,7 +88,7 @@ export function Header() {
               <span className="text-sm">+65 8686 0775</span>
             </a>
             <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#contact">{t.nav.getQuote}</a>
+              <a href={isHome ? "#contact" : "/#contact"}>{t.nav.getQuote}</a>
             </Button>
           </div>
 
@@ -139,7 +142,7 @@ export function Header() {
                 </div>
               </div>
               <Button asChild className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>{t.nav.getQuote}</a>
+                <a href={isHome ? "#contact" : "/#contact"} onClick={() => setIsMobileMenuOpen(false)}>{t.nav.getQuote}</a>
               </Button>
             </nav>
           </div>

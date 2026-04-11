@@ -45,10 +45,9 @@ export const vehicles: Vehicle[] = [
       "丰田埃尔法是我们的旗舰MPV——宽敞、精致，适合各类出行。无论是机场接送、家庭出游还是团体旅行，埃尔法以宽敞的座位空间和平稳安静的驾乘体验，确保每位乘客从出发到抵达全程舒适如一。",
     features: ["Dual Rear Monitors", "Premium Leather Seats", "Ambient Lighting", "Sliding Door Entry"],
     featuresZh: ["双后排显示屏", "顶级皮革座椅", "氛围灯光", "电动推拉门"],
-    image: "/vehicles/alphard.png",
-    photo: "/vehicles/alphard-photo.jpg",
-    heroImage:
-      "/vehicles/alphard-photo.png",
+    image: "/vehicles/alphard-photo.png",
+    photo: "/vehicles/alphard-photo.png",
+    heroImage: "/vehicles/alphard-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -72,10 +71,9 @@ export const vehicles: Vehicle[] = [
       "豪华轿车的巅峰之作。奔驰S级提供无与伦比的优雅感受、超静音座舱及尖端舒适科技——是VIP接送、高管出行及一切追求极致体验的不二之选。",
     features: ["Massage Seats", "Burmester Sound System", "Executive Rear Package", "MBUX Rear Entertainment"],
     featuresZh: ["按摩座椅", "柏林之声音响系统", "行政后排配置", "MBUX后排娱乐系统"],
-    image: "/vehicles/s-class.png",
-    photo: "/vehicles/s-class-photo.jpg",
-    heroImage:
-      "/vehicles/s-class-photo.png",
+    image: "/vehicles/s-class-photo.png",
+    photo: "/vehicles/s-class-photo.png",
+    heroImage: "/vehicles/s-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $170" },
       { service: "Airport Transfer (Changi)", rate: "From $170" },
@@ -99,10 +97,9 @@ export const vehicles: Vehicle[] = [
       "商务出行的精致之选，适用于日常行政接送、机场转运及客户接待。奔驰E级兼具优雅外观与从容舒适的驾乘体验，是企业商务出行的信赖之选。",
     features: ["Premium Leather Interior", "Dual-Zone Climate Control", "USB Charging Ports", "Panoramic Sunroof"],
     featuresZh: ["顶级皮革内饰", "双区空调控制", "USB充电接口", "全景天窗"],
-    image: "/vehicles/e-class.png",
-    photo: "/vehicles/e-class-photo.jpg",
-    heroImage:
-      "/vehicles/e-class-photo.png",
+    image: "/vehicles/e-class-photo.png",
+    photo: "/vehicles/e-class-photo.png",
+    heroImage: "/vehicles/e-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -126,10 +123,9 @@ export const vehicles: Vehicle[] = [
       "为大型团体提供宽敞奢华体验，不妥协于奔驰的精致品质。V级配备会议式商务座椅、全景天窗及后排独立空调——专为企业团队接送、家庭出游及大件行李运输而设计。",
     features: ["Captain Seats", "Panoramic Roof", "Rear Climate Zone", "Folding Tables"],
     featuresZh: ["商务Captain座椅", "全景天窗", "后排独立空调", "可折叠桌板"],
-    image: "/vehicles/v-class.png",
-    photo: "/vehicles/v-class-photo.jpg",
-    heroImage:
-      "/vehicles/v-class-photo.png",
+    image: "/vehicles/v-class-photo.png",
+    photo: "/vehicles/v-class-photo.png",
+    heroImage: "/vehicles/v-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -153,10 +149,9 @@ export const vehicles: Vehicle[] = [
       "专为企业团队、旅游团及中型活动设计，提供舒适可靠的团体运输服务。丰田海狮舒适容纳13名乘客，并配备宽敞行李空间——是新加坡境内及跨境团体出行的实用之选。",
     features: ["13 Passenger Seats", "Ample Boot Space", "Full Air Conditioning", "Reclining Seats"],
     featuresZh: ["13个乘客座位", "宽敞行李空间", "全车空调", "可调节座椅"],
-    image: "/vehicles/hiace.png",
-    photo: "/vehicles/hiace-photo.jpg",
-    heroImage:
-      "/vehicles/hiace-photo.png",
+    image: "/vehicles/hiace-photo.png",
+    photo: "/vehicles/hiace-photo.png",
+    heroImage: "/vehicles/hiace-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -180,10 +175,9 @@ export const vehicles: Vehicle[] = [
       "全尺寸豪华巴士，适用于大型企业活动、峰会、颁奖晚宴及新加坡各地的团体接送。可舒适容纳40名乘客，配备可调节座椅及全车空调——是人数超出小型巴士容量时的最佳选择。",
     features: ["40 Reclining Seats", "Full Air Conditioning", "Large Luggage Bay", "PA System Available"],
     featuresZh: ["40个可调节座椅", "全车空调", "大容量行李舱", "PA广播系统（可选）"],
-    image: "/vehicles/bus.png",
-    photo: "/vehicles/bus-photo.jpg",
-    heroImage:
-      "/vehicles/coach-photo.png",
+    image: "/vehicles/coach-photo.png",
+    photo: "/vehicles/coach-photo.png",
+    heroImage: "/vehicles/coach-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "On Request" },
       { service: "Airport Transfer (Changi)", rate: "On Request" },
