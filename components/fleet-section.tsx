@@ -11,13 +11,13 @@ import { useLanguage } from "@/lib/i18n"
 const fleet = [
   {
     slug: "toyota-alphard",
-    name: "Toyota Alphard AG40",
+    name: "Toyota Alphard / Vellfire",
     category: "luxury-mpv",
     passengers: 6,
     luggage: 4,
     image: "/vehicles/alphard-photo.png",
-    description: "Japan's most prestigious MPV — the latest AG40 generation with premium leather, dual rear monitors, and unrivalled cabin space.",
-    descriptionZh: "日本最尊贵的MPV——最新AG40一代，配备顶级皮革、双后排显示屏及无与伦比的宽敞座舱。",
+    description: "Japan's most prestigious MPV — premium leather, dual rear monitors, and unrivalled cabin space for the discerning traveller.",
+    descriptionZh: "日本最尊贵的MPV——顶级皮革、双后排显示屏及无与伦比的宽敞座舱，专为尊贵旅客而设。",
     features: ["Dual Rear Monitors", "Premium Leather", "Ambient Lighting"],
     featuresZh: ["双后排显示屏", "顶级皮革座椅", "氛围灯光"],
   },

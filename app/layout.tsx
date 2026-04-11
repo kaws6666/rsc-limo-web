@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Royal Stallion Chauffeurs | Premium Limousine Service Singapore',
-  description: 'Singapore\'s premier chauffeur and limousine service. Luxury fleet including Mercedes S-Class, E-Class, V-Class, Toyota Alphard AG40, and coach services for corporate, airport transfers, and events.',
+  description: 'Singapore\'s premier chauffeur and limousine service. Luxury fleet including Mercedes S-Class, E-Class, V-Class, Toyota Alphard/Vellfire, and coach services for corporate, airport transfers, and events.',
   icons: {
     icon: [
       {

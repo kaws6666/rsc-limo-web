@@ -12,7 +12,7 @@ const footerServices = [
 ]
 
 const footerFleet = [
-  { label: "Toyota Alphard AG40", href: "/fleet/toyota-alphard" },
+  { label: "Toyota Alphard / Vellfire", href: "/fleet/toyota-alphard" },
   { label: "Mercedes S-Class", href: "/fleet/mercedes-s-class" },
   { label: "Mercedes E-Class", href: "/fleet/mercedes-e-class" },
   { label: "Mercedes V-Class", href: "/fleet/mercedes-v-class" },
@@ -24,7 +24,6 @@ const footerCompany = [
   { label: "About Us", labelZh: "关于我们", href: "/#about" },
   { label: "Our Fleet", labelZh: "我们的车队", href: "/#fleet" },
   { label: "Testimonials", labelZh: "客户评价", href: "/#testimonials" },
-  { label: "Join Our Team", labelZh: "加入我们", href: "/#contact" },
   { label: "Contact", labelZh: "联系我们", href: "/#contact" },
 ]
 

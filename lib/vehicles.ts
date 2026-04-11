@@ -32,7 +32,7 @@ const surcharges = [
 export const vehicles: Vehicle[] = [
   {
     slug: "toyota-alphard",
-    name: "Toyota Alphard AG40",
+    name: "Toyota Alphard / Vellfire",
     category: "PREMIUM MPV",
     categoryZh: "高级MPV",
     tagline: "Up to 6 passengers · From $70",
