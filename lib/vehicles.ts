@@ -25,7 +25,8 @@ export interface Vehicle {
 
 const surcharges = [
   "Midnight Surcharge (0000–0600): +$15",
-  "Baby Seat(s): +$10",
+  "Additional Drop Off Point: +$10 per drop-off",
+  "Baby/Child Seat(s): +$10",
   "Waiting Fee: First 10 mins free, subsequent $10 per 15 mins",
 ]
 
