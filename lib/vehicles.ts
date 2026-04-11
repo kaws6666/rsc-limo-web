@@ -48,7 +48,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/alphard.png",
     photo: "/vehicles/alphard-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1767023025057-9f4033342df2?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/alphard-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -75,7 +75,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/s-class.png",
     photo: "/vehicles/s-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1764089859662-7b4773dff85b?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/s-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $170" },
       { service: "Airport Transfer (Changi)", rate: "From $170" },
@@ -102,7 +102,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/e-class.png",
     photo: "/vehicles/e-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1765446925499-71c1c9f797c4?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/e-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $70" },
       { service: "Airport Transfer (Changi)", rate: "From $70" },
@@ -129,7 +129,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/v-class.png",
     photo: "/vehicles/v-class-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1775637483809-3bdb2a80fb77?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/v-class-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -156,7 +156,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/hiace.png",
     photo: "/vehicles/hiace-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1775053392841-7fa6dabdb760?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/hiace-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "From $80" },
       { service: "Airport Transfer (Changi)", rate: "From $80" },
@@ -183,7 +183,7 @@ export const vehicles: Vehicle[] = [
     image: "/vehicles/bus.png",
     photo: "/vehicles/bus-photo.jpg",
     heroImage:
-      "https://images.unsplash.com/photo-1546347930-c3a16cd9ff0a?q=80&w=1200&auto=format&fit=crop",
+      "/vehicles/coach-photo.png",
     pricing: [
       { service: "Point-to-Point Transfer", rate: "On Request" },
       { service: "Airport Transfer (Changi)", rate: "On Request" },
