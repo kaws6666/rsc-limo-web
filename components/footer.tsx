@@ -4,11 +4,11 @@ import { Phone, Mail, Facebook } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 
 const footerServices = [
-  { label: "Airport Transfers", labelZh: "机场接送", href: "#services" },
-  { label: "Corporate Travel", labelZh: "企业商务出行", href: "#services" },
-  { label: "Events & Weddings", labelZh: "活动与婚礼", href: "#services" },
-  { label: "Group Transport", labelZh: "团体运输", href: "#services" },
-  { label: "City Tours", labelZh: "城市观光", href: "#services" },
+  { label: "Airport Transfers", labelZh: "机场接送", href: "/#services" },
+  { label: "Corporate Travel", labelZh: "企业商务出行", href: "/#services" },
+  { label: "Events & Weddings", labelZh: "活动与婚礼", href: "/#services" },
+  { label: "Group Transport", labelZh: "团体运输", href: "/#services" },
+  { label: "City Tours", labelZh: "城市观光", href: "/#services" },
 ]
 
 const footerFleet = [
@@ -16,15 +16,16 @@ const footerFleet = [
   { label: "Mercedes S-Class", href: "/fleet/mercedes-s-class" },
   { label: "Mercedes E-Class", href: "/fleet/mercedes-e-class" },
   { label: "Mercedes V-Class", href: "/fleet/mercedes-v-class" },
-  { label: "Minibus & Coach", labelZh: "小型巴士 & 豪华巴士", href: "/fleet/toyota-hiace" },
+  { label: "Toyota Hiace (13-Seater)", labelZh: "丰田海狮（13座）", href: "/fleet/toyota-hiace" },
+  { label: "40-Seater Coach", labelZh: "40座豪华巴士", href: "/fleet/40-seater-bus" },
 ]
 
 const footerCompany = [
-  { label: "About Us", labelZh: "关于我们", href: "#about" },
-  { label: "Our Fleet", labelZh: "我们的车队", href: "#fleet" },
-  { label: "Testimonials", labelZh: "客户评价", href: "#" },
-  { label: "Join Our Team", labelZh: "加入我们", href: "#" },
-  { label: "Contact", labelZh: "联系我们", href: "#contact" },
+  { label: "About Us", labelZh: "关于我们", href: "/#about" },
+  { label: "Our Fleet", labelZh: "我们的车队", href: "/#fleet" },
+  { label: "Testimonials", labelZh: "客户评价", href: "/#testimonials" },
+  { label: "Join Our Team", labelZh: "加入我们", href: "/#contact" },
+  { label: "Contact", labelZh: "联系我们", href: "/#contact" },
 ]
 
 export function Footer() {
@@ -36,7 +37,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <a href="#" className="flex items-center mb-6">
+            <a href="/" className="flex items-center mb-6">
               <img
                 src="/logo.png"
                 alt="Royal Stallion Chauffeurs"
