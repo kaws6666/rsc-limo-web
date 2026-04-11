@@ -173,7 +173,8 @@ export const translations = {
       surchargesTitle: "Surcharges & Additional Fees",
       surcharges: [
         "Midnight Surcharge (0000–0600): +$15",
-        "Baby Seat(s): +$10",
+        "Additional Drop Off Point: +$10 per drop-off",
+        "Baby/Child Seat(s): +$10",
         "Waiting Fee: First 10 mins free, subsequent $10 per 15 mins",
       ],
       serviceNames: {
@@ -366,7 +367,8 @@ export const translations = {
       surchargesTitle: "附加费及额外收费",
       surcharges: [
         "深夜附加费（0000–0600）：+$15",
-        "儿童安全座椅：+$10",
+        "额外下车点：每个下车点+$10",
+        "婴儿/儿童安全座椅：+$10",
         "等候费：首10分钟免费，之后每15分钟收取$10",
       ],
       serviceNames: {
