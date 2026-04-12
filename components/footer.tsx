@@ -111,10 +111,10 @@ export function Footer() {
             © {new Date().getFullYear()} Royal Stallion Chauffeurs Pte. Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+            <a href="/terms" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               {t.footer.privacy}
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+            <a href="/terms" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               {t.footer.terms}
             </a>
           </div>

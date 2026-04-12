@@ -181,17 +181,13 @@ export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
             </ul>
 
             {/* T&Cs */}
-            <h3 className="font-serif text-xl font-medium text-foreground mb-4">
-              {tv.tcTitle}
-            </h3>
-            <ul className="space-y-1">
-              {tv.tc.map((term) => (
-                <li key={term} className="flex items-start gap-2 text-muted-foreground text-sm">
-                  <span className="text-primary/60 mt-1">›</span>
-                  <span>{term}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="text-muted-foreground text-sm">
+              By making a booking, you agree to our{" "}
+              <Link href="/terms" className="text-primary hover:underline">
+                Terms & Conditions and Privacy Policy
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>
