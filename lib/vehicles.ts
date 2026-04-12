@@ -41,11 +41,11 @@ export const vehicles: Vehicle[] = [
     luggage: 4,
     startingPrice: "From $70",
     description:
-      "The Toyota Alphard is our flagship MPV — spacious, refined, and ready for any journey. Perfect for airport transfers, family outings, and group travel, the Alphard combines generous seating with a smooth, quiet ride that keeps every passenger comfortable from door to door.",
+      "The Toyota Alphard / Vellfire is our flagship MPV — spacious, refined, and ready for any journey. Perfect for airport transfers, family outings, and group travel, it combines generous seating with a smooth, quiet ride that keeps every passenger comfortable from door to door.",
     descriptionZh:
-      "丰田埃尔法是我们的旗舰MPV——宽敞、精致，适合各类出行。无论是机场接送、家庭出游还是团体旅行，埃尔法以宽敞的座位空间和平稳安静的驾乘体验，确保每位乘客从出发到抵达全程舒适如一。",
-    features: ["Dual Rear Monitors", "Premium Leather Seats", "Ambient Lighting", "Sliding Door Entry"],
-    featuresZh: ["双后排显示屏", "顶级皮革座椅", "氛围灯光", "电动推拉门"],
+      "丰田埃尔法/威尔法是我们的旗舰MPV——宽敞、精致，适合各类出行。无论是机场接送、家庭出游还是团体旅行，以宽敞的座位空间和平稳安静的驾乘体验，确保每位乘客从出发到抵达全程舒适如一。",
+    features: ["Premium Leather Seats", "Ambient Lighting", "Sliding Door Entry", "Spacious Cabin"],
+    featuresZh: ["顶级皮革座椅", "氛围灯光", "电动推拉门", "宽敞座舱"],
     image: "/vehicles/alphard-photo.png",
     photo: "/vehicles/alphard-photo.png",
     heroImage: "/vehicles/alphard-photo.png",
