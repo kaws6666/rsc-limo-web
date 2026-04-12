@@ -55,7 +55,7 @@ export function Footer() {
                 <Mail className="w-4 h-4" />
                 <span>hello@rsclimo.com.sg</span>
               </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/rsclimousine" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Facebook className="w-4 h-4" />
                 <span>Facebook</span>
               </a>
