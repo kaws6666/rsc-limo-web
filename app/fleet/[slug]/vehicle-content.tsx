@@ -4,7 +4,21 @@ import { Button } from "@/components/ui/button"
 import { Users, Briefcase, Phone, MessageCircle, ArrowLeft, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/lib/i18n"
-import type { Vehicle } from "@/lib/vehicles"
+type Vehicle = {
+  slug: string
+  name: string
+  nameZh?: string
+  category: string
+  categoryZh?: string
+  passengers: number
+  luggage: number
+  startingPrice: string
+  description: string
+  descriptionZh?: string
+  features: string[]
+  featuresZh?: string[]
+  pricing: { service: string; rate: string }[]
+}
 
 export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
   const { lang, t } = useLanguage()
@@ -13,9 +27,20 @@ export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
   const waText = encodeURIComponent(`Hi RSC Limo, I would like to book the ${vehicle.name}`)
   const waLink = `https://wa.me/6586860775?text=${waText}`
 
-  const description = lang === "zh" ? vehicle.descriptionZh : vehicle.description
-  const features = lang === "zh" ? vehicle.featuresZh : vehicle.features
-  const category = lang === "zh" ? vehicle.categoryZh : vehicle.category
+  const description = lang === "zh" && vehicle.descriptionZh ? vehicle.descriptionZh : vehicle.description
+  const features = lang === "zh" && vehicle.featuresZh ? vehicle.featuresZh : vehicle.features
+  const category = lang === "zh" && vehicle.categoryZh ? vehicle.categoryZh : vehicle.category
+
+  // Local image map
+  const imageMap: Record<string, string> = {
+    'toyota-alphard': '/vehicles/alphard-photo.png',
+    'mercedes-s-class': '/vehicles/s-class-photo.png',
+    'mercedes-e-class': '/vehicles/e-class-photo.png',
+    'mercedes-v-class': '/vehicles/v-class-photo.png',
+    'toyota-hiace': '/vehicles/hiace-photo.png',
+    '40-seater-bus': '/vehicles/coach-photo.png',
+  }
+  const vehicleImage = imageMap[vehicle.slug] ?? '/vehicles/alphard-photo.png'
 
   const translateService = (s: string) =>
     lang === "zh" ? (tv.serviceNames[s] ?? s) : s
@@ -29,7 +54,7 @@ export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
       <section className="relative h-[50vh] min-h-[400px] flex items-end overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${vehicle.heroImage}')` }}
+          style={{ backgroundImage: `url('${vehicleImage}')` }}
         />
         <div className="absolute inset-0 bg-background/75" />
         <div className="relative z-10 container mx-auto px-6 pb-12">
@@ -72,7 +97,7 @@ export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
               aria-label={vehicle.name}
               style={{
                 backgroundColor: '#0d0d0d',
-                backgroundImage: `url('${vehicle.image}')`,
+                backgroundImage: `url('${vehicleImage}')`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 backgroundSize: 'contain',

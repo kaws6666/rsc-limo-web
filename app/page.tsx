@@ -7,14 +7,17 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
+import { getAllVehicles } from "@/sanity/lib/queries"
 
-export default function Home() {
+export default async function Home() {
+  const vehicles = await getAllVehicles()
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
       <HeroSection />
       <ServicesSection />
-      <FleetSection />
+      <FleetSection vehicles={vehicles} />
       <AboutSection />
       <TestimonialsSection />
       <ContactSection />

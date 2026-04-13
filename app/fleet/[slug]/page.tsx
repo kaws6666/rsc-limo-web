@@ -1,17 +1,18 @@
 import { notFound } from "next/navigation"
-import { getVehicleBySlug, vehicles } from "@/lib/vehicles"
+import { getAllVehicles, getVehicleBySlug } from "@/sanity/lib/queries"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { VehicleContent } from "./vehicle-content"
 
-export function generateStaticParams() {
-  return vehicles.map((v) => ({ slug: v.slug }))
+export async function generateStaticParams() {
+  const vehicles = await getAllVehicles()
+  return vehicles.map((v: { slug: string }) => ({ slug: v.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const vehicle = getVehicleBySlug(slug)
+  const vehicle = await getVehicleBySlug(slug)
   if (!vehicle) return {}
   return {
     title: `${vehicle.name} | Royal Stallion Chauffeurs Singapore`,
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function VehiclePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const vehicle = getVehicleBySlug(slug)
+  const vehicle = await getVehicleBySlug(slug)
   if (!vehicle) notFound()
 
   return (
