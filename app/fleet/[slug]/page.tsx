@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getAllVehicles, getVehicleBySlug } from "@/sanity/lib/queries"
+import { getAllVehicles, getVehicleBySlug, getSiteSettings } from "@/sanity/lib/queries"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
@@ -22,13 +22,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function VehiclePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const vehicle = await getVehicleBySlug(slug)
+  const [vehicle, siteSettings] = await Promise.all([
+    getVehicleBySlug(slug),
+    getSiteSettings(),
+  ])
   if (!vehicle) notFound()
 
   return (
     <>
       <Header />
-      <VehicleContent vehicle={vehicle} />
+      <VehicleContent vehicle={vehicle} siteSettings={siteSettings} />
       <Footer />
       <WhatsAppButton />
     </>

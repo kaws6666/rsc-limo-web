@@ -20,7 +20,12 @@ type Vehicle = {
   pricing: { service: string; rate: string }[]
 }
 
-export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
+type SiteSettings = {
+  surcharges?: string[]
+  surchargesZh?: string[]
+} | null
+
+export function VehicleContent({ vehicle, siteSettings }: { vehicle: Vehicle; siteSettings?: SiteSettings }) {
   const { lang, t } = useLanguage()
   const tv = t.vehicle
 
@@ -197,7 +202,13 @@ export function VehicleContent({ vehicle }: { vehicle: Vehicle }) {
               {tv.surchargesTitle}
             </h3>
             <ul className="space-y-2 mb-10">
-              {tv.surcharges.map((s) => (
+              {(
+                (lang === "zh" && siteSettings?.surchargesZh?.length
+                  ? siteSettings.surchargesZh
+                  : siteSettings?.surcharges?.length
+                  ? siteSettings.surcharges
+                  : tv.surcharges)
+              ).map((s) => (
                 <li key={s} className="flex items-start gap-2 text-muted-foreground">
                   <span className="text-primary mt-1">✦</span>
                   <span>{s}</span>
