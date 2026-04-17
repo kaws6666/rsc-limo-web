@@ -7,6 +7,7 @@ import { Users, Briefcase, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { useLanguage } from "@/lib/i18n"
+import { vehicleImages } from "@/lib/vehicle-images"
 
 // Map Sanity category values to filter IDs
 const categoryMap: Record<string, string> = {
@@ -15,16 +16,6 @@ const categoryMap: Record<string, string> = {
   'PREMIUM MPV': 'luxury-mpv',
   'GROUP TRANSPORT': 'group',
   'COACH': 'group',
-}
-
-// Local image map — keyed by slug
-const vehicleImages: Record<string, string> = {
-  'toyota-alphard': '/vehicles/alphard-photo.png',
-  'mercedes-s-class': '/vehicles/s-class-photo.png',
-  'mercedes-e-class': '/vehicles/e-class-photo.png',
-  'mercedes-v-class': '/vehicles/v-class-photo.png',
-  'toyota-hiace': '/vehicles/hiace-photo.png',
-  '40-seater-bus': '/vehicles/coach-photo.png',
 }
 
 type SanityVehicle = {

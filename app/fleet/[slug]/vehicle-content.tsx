@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Users, Briefcase, Phone, MessageCircle, ArrowLeft, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/lib/i18n"
+import { vehicleImages } from "@/lib/vehicle-images"
 type Vehicle = {
   slug: string
   name: string
@@ -36,16 +37,7 @@ export function VehicleContent({ vehicle, siteSettings }: { vehicle: Vehicle; si
   const features = lang === "zh" && vehicle.featuresZh ? vehicle.featuresZh : vehicle.features
   const category = lang === "zh" && vehicle.categoryZh ? vehicle.categoryZh : vehicle.category
 
-  // Local image map
-  const imageMap: Record<string, string> = {
-    'toyota-alphard': '/vehicles/alphard-photo.png',
-    'mercedes-s-class': '/vehicles/s-class-photo.png',
-    'mercedes-e-class': '/vehicles/e-class-photo.png',
-    'mercedes-v-class': '/vehicles/v-class-photo.png',
-    'toyota-hiace': '/vehicles/hiace-photo.png',
-    '40-seater-bus': '/vehicles/coach-photo.png',
-  }
-  const vehicleImage = imageMap[vehicle.slug] ?? '/vehicles/alphard-photo.png'
+  const vehicleImage = vehicleImages[vehicle.slug] ?? '/vehicles/alphard-photo.png'
 
   const translateService = (s: string) =>
     lang === "zh" ? (tv.serviceNames[s] ?? s) : s

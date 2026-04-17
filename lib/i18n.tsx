@@ -93,7 +93,6 @@ export const translations = {
         { value: "10+", label: "Years Experience" },
         { value: "100%", label: "Safety Record" },
       ],
-      yearsOverlay: "Years of Excellence",
     },
 
     // Testimonials
@@ -188,24 +187,10 @@ export const translations = {
         "From $80": "From $80",
         "From $170": "From $170",
       } as Record<string, string>,
-      tcTitle: "Terms & Conditions",
       ctaTitle: "Ready to Book the",
       ctaSubtitle:
         "Our team is available 24/7 — WhatsApp us to check availability and confirm your booking.",
       requestQuote: "Request a Quote",
-      imageDisclaimer: "Images are for reference purposes only",
-      tc: [
-        "All prices are subject to prevailing GST",
-        "Advance booking of 24+ hours is recommended",
-        "Cancellations must be made at least 24 hours before pickup",
-        "No-shows and late cancellations will be charged in full",
-        "Smoking is strictly prohibited in all vehicles",
-        "Pets are not permitted without prior arrangement",
-        "Child safety seats are available upon request",
-        "Quoted rates apply for standard transfers within Singapore",
-        "Cross-border and Malaysia/Batam rates are quoted separately",
-        "RSC reserves the right to substitute with a vehicle of equal or higher class",
-      ],
     },
   },
 
@@ -289,7 +274,6 @@ export const translations = {
         { value: "10+", label: "年行业经验" },
         { value: "100%", label: "安全记录" },
       ],
-      yearsOverlay: "年卓越服务",
     },
 
     // Testimonials
@@ -382,23 +366,9 @@ export const translations = {
         "From $80": "从$80起",
         "From $170": "从$170起",
       } as Record<string, string>,
-      tcTitle: "条款与条件",
       ctaTitle: "立即预订",
       ctaSubtitle: "我们的团队全天候待命——通过WhatsApp与我们联系以确认预订。",
       requestQuote: "申请报价",
-      imageDisclaimer: "图片仅供参考",
-      tc: [
-        "所有价格须缴纳现行消费税（GST）",
-        "建议提前24小时以上预订",
-        "取消预订须于接载时间前至少24小时提出",
-        "缺席及临时取消将照常收取全额费用",
-        "所有车辆内严禁吸烟",
-        "如需携带宠物，请提前告知",
-        "如需儿童安全座椅，请提前要求",
-        "报价适用于新加坡境内的标准接送服务",
-        "跨境及马来西亚/峇淡岛的费用另行报价",
-        "RSC保留以同等或更高级别车辆替换的权利",
-      ],
     },
   },
 }

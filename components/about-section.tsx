@@ -1,9 +1,9 @@
 "use client"
 
-import { Shield, Clock, Users } from "lucide-react"
+import { Shield, Clock, Users, Trophy } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 
-const statIcons = [Clock, Users, Clock, Shield]
+const statIcons = [Clock, Users, Trophy, Shield]
 
 export function AboutSection() {
   const { t } = useLanguage()
