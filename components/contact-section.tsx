@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -18,64 +18,47 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
-function ContactCard({ item }: { item: { icon: React.ElementType; label: string; value: string; href: string } }) {
+function ContactCard({ item, index }: { item: { icon: React.ElementType; label: string; value: string; href: string }; index: number }) {
   const [hovered, setHovered] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect()
-    if (!rect) return
-    setMousePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    })
-  }
+  const floatDelay = index * 0.7
 
   return (
     <motion.div
-      ref={cardRef}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      animate={hovered
+        ? { y: -8 }
+        : { y: [0, -5, 0] }
+      }
+      transition={hovered
+        ? { duration: 0.25, ease: "easeOut" }
+        : { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: floatDelay }
+      }
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
       className="relative overflow-hidden rounded-lg p-6 cursor-default"
       style={{
         background: "hsl(var(--card))",
-        border: `1px solid ${hovered ? "rgba(212,168,67,0.55)" : "rgba(255,255,255,0.07)"}`,
+        border: `1px solid ${hovered ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.07)"}`,
         transition: "border-color 0.3s ease, box-shadow 0.3s ease",
         boxShadow: hovered
-          ? "0 0 0 1px rgba(212,168,67,0.2), 0 8px 32px rgba(212,168,67,0.15), 0 2px 8px rgba(0,0,0,0.4)"
+          ? "0 20px 50px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)"
           : "0 2px 8px rgba(0,0,0,0.2)",
       }}
     >
-      {/* Cursor-tracking shimmer */}
-      <div
-        className="absolute inset-0 pointer-events-none"
+      <motion.div
+        animate={hovered ? { scale: 1.1, rotate: -3 } : { scale: 1, rotate: 0 }}
+        transition={{ type: "spring", stiffness: 380, damping: 16 }}
+        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
         style={{
-          opacity: hovered ? 1 : 0,
-          transition: "opacity 0.3s ease",
-          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(212,168,67,0.1) 0%, transparent 60%)`,
+          background: hovered ? "rgba(212,168,67,0.18)" : "rgba(212,168,67,0.08)",
+          transition: "background 0.3s ease",
         }}
-      />
-
-      <div className="relative">
-        <motion.div
-          animate={hovered ? { scale: 1.1 } : { scale: 1 }}
-          transition={{ type: "spring", stiffness: 380, damping: 18 }}
-          className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
-          style={{
-            background: hovered ? "rgba(212,168,67,0.22)" : "rgba(212,168,67,0.10)",
-            transition: "background 0.3s ease",
-          }}
-        >
-          <item.icon className="w-6 h-6 text-primary" />
-        </motion.div>
-        <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-        <a href={item.href} className="text-foreground font-medium hover:text-primary transition-colors">
-          {item.value}
-        </a>
-      </div>
+      >
+        <item.icon className="w-6 h-6 text-primary" />
+      </motion.div>
+      <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
+      <a href={item.href} className="text-foreground font-medium hover:text-primary transition-colors">
+        {item.value}
+      </a>
     </motion.div>
   )
 }
@@ -227,8 +210,8 @@ export function ContactSection() {
           {/* Contact Information */}
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {contactInfo.map((item) => (
-                <ContactCard key={item.label} item={item} />
+              {contactInfo.map((item, i) => (
+                <ContactCard key={item.label} item={item} index={i} />
               ))}
             </div>
 

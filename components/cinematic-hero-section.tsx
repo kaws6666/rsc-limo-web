@@ -7,7 +7,7 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SERIF    = "var(--font-serif, 'Playfair Display', Georgia, serif)";
+const CORMORANT = "var(--font-cormorant, 'Cormorant Garamond', Georgia, serif)";
 const TOTAL    = 121;
 const DURATION = 5.04;
 
@@ -41,6 +41,7 @@ export function CinematicHeroSection() {
   const card2Ref    = useRef<HTMLDivElement>(null);
   const card3Ref    = useRef<HTMLDivElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
+  const fadeRef     = useRef<HTMLDivElement>(null);
 
   const [loadPct, setLoadPct] = useState(0);
   const [ready,   setReady]   = useState(false);
@@ -93,12 +94,13 @@ export function CinematicHeroSection() {
     const ctx      = canvas.getContext("2d")!;
     const cW       = canvas.width;
     const cH       = canvas.height;
-    const scrollVH = Math.round(Math.min(Math.max(DURATION * 45, 200), 600));
+    const scrollVH = Math.round(Math.min(Math.max(DURATION * 75, 350), 900));
 
     gsap.set([card1Ref.current, card2Ref.current, card3Ref.current], { opacity: 0 });
     gsap.set(ctaRef.current,  { opacity: 0, y: 60 });
     gsap.set(hintRef.current, { opacity: 1 });
     gsap.set(logoRef.current, { opacity: 1, scale: 1 });
+    gsap.set(fadeRef.current, { opacity: 0 });
 
     const t = (pct: number) => DURATION * pct;
 
@@ -152,11 +154,15 @@ export function CinematicHeroSection() {
       tl.to(card2Ref.current, { opacity: 1, duration: t(0.06), ease: "power2.out" }, t(0.30));
       tl.to(card2Ref.current, { opacity: 0, duration: t(0.06), ease: "power2.in"  }, t(0.68));
 
-      // Card 3 (center tagline) takes over once corners clear
-      tl.to(card3Ref.current, { opacity: 1, duration: t(0.07), ease: "power2.out" }, t(0.72));
-      tl.to(card3Ref.current, { opacity: 0, duration: t(0.06), ease: "power2.in"  }, t(0.88));
+      // Card 3 (center tagline) — midway through the scroll
+      tl.to(card3Ref.current, { opacity: 1, duration: t(0.06), ease: "power2.out" }, t(0.70));
+      tl.to(card3Ref.current, { opacity: 0, duration: t(0.05), ease: "power2.in"  }, t(0.82));
 
-      tl.to(ctaRef.current, { opacity: 1, y: 0, duration: t(0.08), ease: "power2.out" }, t(0.90));
+      // CTA surfaces first — centred, fully visible before darkness closes in
+      tl.to(ctaRef.current, { opacity: 1, y: 0, duration: t(0.07), ease: "power2.out" }, t(0.84));
+
+      // Fade to dark only after CTA is fully on screen — linear so it feels like dusk not a cut
+      tl.fromTo(fadeRef.current, { opacity: 0 }, { opacity: 0.92, duration: t(0.11), ease: "none" }, t(0.89));
     });
 
     return () => { cancelAnimationFrame(rafId); gsapCtx.revert(); lenis.destroy(); };
@@ -201,33 +207,44 @@ export function CinematicHeroSection() {
         <img src="/logo.png" alt="Royal Stallion Chauffeurs" style={{ height: "clamp(3rem, 6vh, 5rem)", width: "auto", objectFit: "contain", filter: "drop-shadow(0 2px 12px rgba(0,0,0,0.6))" }} />
       </div>
 
-      {/* Card 1 — YOUR JOURNEY, */}
-      <div ref={card1Ref} className="absolute pointer-events-none select-none" style={{ zIndex: 10, top: "8vh", left: "5vw", fontFamily: SERIF, fontWeight: 600, fontSize: "clamp(3.2rem, 10vw, 12rem)", lineHeight: 0.92, letterSpacing: "-0.02em", color: "#F5F5F0", textShadow: "0 2px 80px rgba(0,0,0,0.8)" }}>
-        YOUR<br />JOURNEY,
+      {/* Card 1 — "Your journey," top-left, restrained */}
+      <div ref={card1Ref} className="absolute pointer-events-none select-none" style={{ zIndex: 10, top: "18vh", left: "7vw" }}>
+        <p style={{ fontFamily: CORMORANT, fontWeight: 300, fontSize: "clamp(1.4rem, 2.8vw, 3.6rem)", lineHeight: 1.25, letterSpacing: "0.06em", color: "rgba(245,245,240,0.95)", textShadow: "0 1px 40px rgba(0,0,0,0.7)" }}>
+          Your journey,
+        </p>
       </div>
 
-      {/* Card 2 — OUR PLEASURE. */}
-      <div ref={card2Ref} className="absolute pointer-events-none select-none text-right" style={{ zIndex: 10, bottom: "8vh", right: "5vw", fontFamily: SERIF, fontWeight: 600, fontStyle: "italic", fontSize: "clamp(3.2rem, 10vw, 12rem)", lineHeight: 0.92, letterSpacing: "-0.02em", color: "#D4A843", textShadow: "0 2px 80px rgba(0,0,0,0.7)" }}>
-        OUR<br />PLEASURE.
+      {/* Card 2 — "our pleasure." bottom-right, italic gold */}
+      <div ref={card2Ref} className="absolute pointer-events-none select-none text-right" style={{ zIndex: 10, bottom: "18vh", right: "7vw" }}>
+        <p style={{ fontFamily: CORMORANT, fontWeight: 300, fontStyle: "italic", fontSize: "clamp(1.4rem, 2.8vw, 3.6rem)", lineHeight: 1.25, letterSpacing: "0.06em", color: "#D4A843", textShadow: "0 1px 40px rgba(0,0,0,0.6)" }}>
+          our pleasure.
+        </p>
       </div>
 
-      {/* Card 3 — tagline */}
-      <div ref={card3Ref} className="absolute inset-0 pointer-events-none select-none flex items-center justify-center px-6 text-center" style={{ zIndex: 10 }}>
-        <span style={{ fontFamily: SERIF, fontWeight: 400, fontStyle: "italic", fontSize: "clamp(2rem, 6vw, 7rem)", lineHeight: 1.1, letterSpacing: "-0.01em", color: "#D4A843", textShadow: "0 2px 100px rgba(212,168,67,0.35)" }}>
-          Professional chauffeurs<br />across Singapore.
-        </span>
+      {/* Card 3 — centred tagline, minimal */}
+      <div ref={card3Ref} className="absolute inset-0 pointer-events-none select-none flex flex-col items-center justify-center gap-4 px-6 text-center" style={{ zIndex: 10 }}>
+        <p style={{ fontFamily: CORMORANT, fontWeight: 300, fontStyle: "italic", fontSize: "clamp(1.6rem, 3vw, 3.8rem)", lineHeight: 1.3, letterSpacing: "0.04em", color: "rgba(245,245,240,0.9)", textShadow: "0 1px 50px rgba(0,0,0,0.65)" }}>
+          Every ride, handled with care.
+        </p>
+        <span style={{ display: "block", width: "2rem", height: "1px", background: "rgba(212,168,67,0.6)", margin: "0 auto" }} />
+        <p style={{ fontFamily: "var(--font-sans)", fontWeight: 300, fontSize: "clamp(0.55rem, 0.9vw, 0.75rem)", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(212,168,67,0.7)" }}>
+          Singapore&rsquo;s trusted chauffeur service
+        </p>
       </div>
 
-      {/* CTA panel */}
-      <div ref={ctaRef} className="absolute inset-x-0 bottom-0 flex flex-col items-center pb-16 px-6 text-center" style={{ zIndex: 20 }}>
-        <p style={{ color: "rgba(212,168,67,0.8)", fontSize: "0.58rem", letterSpacing: "0.5em", textTransform: "uppercase", marginBottom: "1.25rem" }}>
-          Your comfort is our priority
+      {/* Fade-to-dark overlay — sits below the CTA so buttons stay visible */}
+      <div ref={fadeRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 15, background: "#0A0A0A" }} />
+
+      {/* CTA panel — centred on screen, surfaces above the fade */}
+      <div ref={ctaRef} className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center" style={{ zIndex: 25 }}>
+        <p style={{ color: "rgba(212,168,67,0.65)", fontSize: "0.62rem", letterSpacing: "0.42em", textTransform: "uppercase", marginBottom: "1.75rem" }}>
+          Book your ride
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact" className="inline-flex items-center justify-center gap-2 text-sm font-medium px-10 py-4 hover:opacity-90 transition-opacity" style={{ background: "#D4A843", color: "#0A0A0A" }}>
+          <a href="#contact" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 hover:opacity-90 transition-opacity" style={{ background: "#D4A843", color: "#0A0A0A", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
             Book Your Ride <span aria-hidden>→</span>
           </a>
-          <a href="tel:+6586860775" className="inline-flex items-center justify-center gap-2 text-sm font-medium px-10 py-4 border hover:bg-white/5 transition-colors" style={{ borderColor: "rgba(212,168,67,0.45)", color: "#F5F5F0" }}>
+          <a href="tel:+6586860775" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 border hover:bg-white/5 transition-colors" style={{ borderColor: "rgba(212,168,67,0.45)", color: "#F5F5F0", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
             <span>📞</span> +65 8686 0775
           </a>
         </div>
