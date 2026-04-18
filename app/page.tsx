@@ -1,5 +1,5 @@
 import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
+import { CinematicHeroSection } from "@/components/cinematic-hero-section"
 import { ServicesSection } from "@/components/services-section"
 import { FleetSection } from "@/components/fleet-section"
 import { AboutSection } from "@/components/about-section"
@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <HeroSection />
+      <CinematicHeroSection />
       <ServicesSection />
       <FleetSection vehicles={vehicles} />
       <AboutSection />

@@ -8,17 +8,35 @@ import { useLanguage } from "@/lib/i18n"
 
 export function Header() {
   const { lang, setLang, t } = useLanguage()
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled]   = useState(false)
+  const [isVisible,  setIsVisible]    = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === "/"
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    const heroEl = document.getElementById("cinematic-hero")
+
+    if (!heroEl) {
+      /* No cinematic hero on this page — show header normally on any scroll */
+      setIsVisible(true)
+      const handleScroll = () => setIsScrolled(window.scrollY > 50)
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+
+    /* Homepage: hide header while the hero is in the viewport (including
+       while it is pinned). Show it the moment it scrolls out of view upward. */
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0
+        setIsVisible(pastHero)
+        setIsScrolled(pastHero)
+      },
+      { threshold: 0 },
+    )
+    observer.observe(heroEl)
+    return () => observer.disconnect()
   }, [])
 
   const navLinks = [
@@ -32,6 +50,10 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
+      } ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-full pointer-events-none"
       }`}
     >
       <div className="container mx-auto px-6">
