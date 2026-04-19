@@ -94,7 +94,7 @@ export function CinematicHeroSection() {
     const ctx      = canvas.getContext("2d")!;
     const cW       = canvas.width;
     const cH       = canvas.height;
-    const scrollVH = Math.round(Math.min(Math.max(DURATION * 75, 350), 900));
+    const scrollVH = Math.round(Math.min(Math.max(DURATION * 40, 200), 450));
 
     gsap.set([card1Ref.current, card2Ref.current, card3Ref.current], { opacity: 0 });
     gsap.set(ctaRef.current,  { opacity: 0, y: 60 });
@@ -104,11 +104,10 @@ export function CinematicHeroSection() {
 
     const t = (pct: number) => DURATION * pct;
 
-    let rafId = 0, targetIdx = 0, currentIdx = 0;
+    let rafId = 0, targetIdx = 0;
 
     const render = () => {
-      currentIdx += (targetIdx - currentIdx) * 0.25;
-      const idx = Math.min(Math.round(currentIdx), frames.length - 1);
+      const idx = Math.min(Math.round(targetIdx), frames.length - 1);
       const img = frames[idx];
       if (img?.complete) drawCover(ctx, img, cW, cH);
       rafId = requestAnimationFrame(render);
