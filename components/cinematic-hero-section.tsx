@@ -85,7 +85,7 @@ export function CinematicHeroSection() {
     if (!ready) return;
 
     const reduced  = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lenis    = new Lenis({ lerp: 0.05 });
+    const lenis    = new Lenis({ lerp: 0.08 });
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
 
@@ -104,15 +104,41 @@ export function CinematicHeroSection() {
 
     const t = (pct: number) => DURATION * pct;
 
-    let rafId = 0, targetIdx = 0;
+    let rafId = 0, targetIdx = 0, lastRafTs = 0;
+    let isScrolling = false;
+    let scrollStopTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const render = () => {
-      const idx = Math.min(Math.round(targetIdx), frames.length - 1);
-      const img = frames[idx];
-      if (img?.complete) drawCover(ctx, img, cW, cH);
+    const IDLE_FPS = 4; // frames per second when no scroll input
+
+    const render = (ts: number = 0) => {
+      // Idle ambient drift — slowly advance through all frames on loop
+      if (!isScrolling) {
+        const delta = lastRafTs ? ts - lastRafTs : 0;
+        targetIdx = (targetIdx + (delta / 1000) * IDLE_FPS) % (frames.length - 1);
+      }
+      lastRafTs = ts;
+
+      // Cross-frame blend: fade between floor/ceil instead of hard Math.round jump
+      const lo  = Math.floor(Math.min(targetIdx, frames.length - 1));
+      const hi  = Math.min(lo + 1, frames.length - 1);
+      const frac = targetIdx - lo;
+
+      const imgLo = frames[lo];
+      const imgHi = frames[hi];
+
+      if (imgLo?.complete) {
+        ctx.globalAlpha = 1;
+        drawCover(ctx, imgLo, cW, cH);
+      }
+      if (frac > 0.01 && imgHi?.complete) {
+        ctx.globalAlpha = frac;
+        drawCover(ctx, imgHi, cW, cH);
+        ctx.globalAlpha = 1;
+      }
+
       rafId = requestAnimationFrame(render);
     };
-    render();
+    rafId = requestAnimationFrame(render);
 
     if (reduced) return () => { cancelAnimationFrame(rafId); lenis.destroy(); };
 
@@ -120,12 +146,16 @@ export function CinematicHeroSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
-          pin: true, scrub: 0.5,
+          pin: true, scrub: 0.3,
           start: "top top",
           end: `+=${scrollVH}%`,
           anticipatePin: 1,
           onUpdate(self) {
             targetIdx = self.progress * (TOTAL - 1);
+            // Mark as scrolling; resume idle drift 1.5 s after last scroll event
+            isScrolling = true;
+            if (scrollStopTimer) clearTimeout(scrollStopTimer);
+            scrollStopTimer = setTimeout(() => { isScrolling = false; }, 1500);
             if (progressRef.current)
               gsap.set(progressRef.current, { scaleX: self.progress });
           },
@@ -164,7 +194,12 @@ export function CinematicHeroSection() {
       tl.fromTo(fadeRef.current, { opacity: 0 }, { opacity: 0.92, duration: t(0.11), ease: "none" }, t(0.89));
     });
 
-    return () => { cancelAnimationFrame(rafId); gsapCtx.revert(); lenis.destroy(); };
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (scrollStopTimer) clearTimeout(scrollStopTimer);
+      gsapCtx.revert();
+      lenis.destroy();
+    };
   }, [ready]);
 
   return (
