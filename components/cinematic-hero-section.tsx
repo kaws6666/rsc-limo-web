@@ -238,7 +238,7 @@ export function CinematicHeroSection() {
       {/* Logo */}
       <div ref={logoRef} className="absolute pointer-events-none select-none" style={{ zIndex: 20, top: "clamp(3rem, 5vh, 4rem)", left: "clamp(1.5rem, 3vw, 3rem)", transformOrigin: "top left" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="Royal Stallion Chauffeurs" style={{ height: "clamp(3rem, 6vh, 5rem)", width: "auto", objectFit: "contain", filter: "drop-shadow(0 2px 12px rgba(0,0,0,0.6))" }} />
+        <img src="/logo.png" alt="Royal Stallion Chauffeurs" style={{ height: "clamp(4.5rem, 9vh, 7.5rem)", width: "auto", objectFit: "contain", filter: "drop-shadow(0 2px 12px rgba(0,0,0,0.6))" }} />
       </div>
 
       {/* Card 1 — "Your journey," top-left, restrained */}
