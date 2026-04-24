@@ -1,50 +1,22 @@
-import { client } from './client'
+/**
+ * Vehicle + site-settings queries — backed by local static data.
+ * Sanity CMS has been removed; all content lives in lib/vehicles-data.ts
+ * and lib/site-settings-data.ts. Edit those files to update the site.
+ *
+ * The function signatures are unchanged so no page files need to be touched.
+ */
+
+import { VEHICLES } from "@/lib/vehicles-data"
+import { SITE_SETTINGS } from "@/lib/site-settings-data"
 
 export async function getAllVehicles() {
-  return client.fetch(`
-    *[_type == "vehicle"] | order(order asc) {
-      "slug": slug.current,
-      name,
-      nameZh,
-      category,
-      categoryZh,
-      passengers,
-      luggage,
-      startingPrice,
-      description,
-      descriptionZh,
-      features,
-      featuresZh,
-      pricing,
-    }
-  `)
+  return VEHICLES
 }
 
 export async function getVehicleBySlug(slug: string) {
-  return client.fetch(`
-    *[_type == "vehicle" && slug.current == $slug][0] {
-      "slug": slug.current,
-      name,
-      nameZh,
-      category,
-      categoryZh,
-      passengers,
-      luggage,
-      startingPrice,
-      description,
-      descriptionZh,
-      features,
-      featuresZh,
-      pricing,
-    }
-  `, { slug })
+  return VEHICLES.find((v) => v.slug === slug) ?? null
 }
 
 export async function getSiteSettings() {
-  return client.fetch(`
-    *[_type == "siteSettings"][0] {
-      surcharges,
-      surchargesZh,
-    }
-  `)
+  return SITE_SETTINGS
 }
