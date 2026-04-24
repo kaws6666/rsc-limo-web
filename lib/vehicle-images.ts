@@ -5,4 +5,5 @@ export const vehicleImages: Record<string, string> = {
   'mercedes-v-class': '/vehicles/v-class-photo.png',
   'toyota-hiace': '/vehicles/hiace-photo.png',
   '40-seater-bus': '/vehicles/coach-photo.png',
+  'mini-coach-bus': '/vehicles/mini-coach-photo.png',
 }
