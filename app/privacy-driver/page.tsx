@@ -37,7 +37,7 @@ export default function DriverPrivacyPage() {
               <p className="text-muted-foreground leading-relaxed">
                 This Privacy Policy applies to the <strong className="text-foreground">RSC Driver</strong> mobile application
                 (&ldquo;the App&rdquo;), available on Android and iOS, operated by{" "}
-                <strong className="text-foreground">Royal Stallion Chauffeurs Pte. Ltd.</strong> (UEN: [your UEN]),
+                <strong className="text-foreground">Royal Stallion Chauffeurs Pte. Ltd.</strong> (UEN: 202307060K),
                 a company incorporated in Singapore (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
               </p>
               <p className="text-muted-foreground leading-relaxed mt-4">
