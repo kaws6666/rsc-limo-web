@@ -214,6 +214,7 @@ export default function DriverPrivacyPage() {
                   ["Access", "Request a copy of the personal data we hold about you."],
                   ["Correction", "Request correction of inaccurate personal data."],
                   ["Withdrawal of consent", "Withdraw consent for certain uses of your data. Note that withdrawing consent for location tracking will prevent use of the App during active jobs."],
+                  ["Deletion", "Request permanent deletion of your account and associated data, subject to the retention exceptions in Section 5 and any legal/accounting record-keeping obligations."],
                 ].map(([right, desc]) => (
                   <div key={right as string} className="flex gap-4">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0 translate-y-1" />
@@ -228,6 +229,32 @@ export default function DriverPrivacyPage() {
                 <a href="mailto:hello@rsclimo.com.sg" className="text-primary hover:underline">
                   hello@rsclimo.com.sg
                 </a>. We will respond within 30 days.
+              </p>
+            </section>
+
+            {/* 7.5 — Data Deletion Requests (anchor target for Play Console "Delete data URL") */}
+            <section id="data-deletion" className="scroll-mt-28">
+              <h2 className="font-serif text-2xl font-medium text-foreground mb-6 pb-3 border-b border-border">
+                How to Request Account &amp; Data Deletion
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                To request deletion of your RSC Driver account and associated personal data:
+              </p>
+              <ol className="mt-4 space-y-3 list-decimal list-inside text-muted-foreground leading-relaxed">
+                <li>
+                  Email{" "}
+                  <a href="mailto:hello@rsclimo.com.sg?subject=Driver%20account%20deletion%20request" className="text-primary hover:underline">
+                    hello@rsclimo.com.sg
+                  </a>{" "}
+                  from your registered driver email address with the subject line &ldquo;Account Deletion Request&rdquo;.
+                </li>
+                <li>Include your full name and the phone number linked to your driver account.</li>
+                <li>We will verify your identity and confirm the request within 30 days.</li>
+              </ol>
+              <p className="text-muted-foreground leading-relaxed mt-4">
+                Upon confirmation, your account, profile information, and photos will be permanently deleted.
+                Location history and job records are deleted per the retention schedule in Section 5, or
+                immediately upon request where no legal or accounting obligation requires retention.
               </p>
             </section>
 
