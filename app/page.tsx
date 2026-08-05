@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { CinematicHeroSection } from "@/components/cinematic-hero-section"
 import { ServicesSection } from "@/components/services-section"
@@ -8,6 +9,12 @@ import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { getAllVehicles } from "@/sanity/lib/queries"
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+}
 
 export default async function Home() {
   const vehicles = await getAllVehicles()

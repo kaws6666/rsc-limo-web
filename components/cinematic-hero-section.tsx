@@ -257,9 +257,9 @@ export function CinematicHeroSection() {
 
       {/* Card 3 — centred tagline, minimal */}
       <div ref={card3Ref} className="absolute inset-0 pointer-events-none select-none flex flex-col items-center justify-center gap-4 px-6 text-center" style={{ zIndex: 10 }}>
-        <p style={{ fontFamily: CORMORANT, fontWeight: 300, fontStyle: "italic", fontSize: "clamp(1.6rem, 3vw, 3.8rem)", lineHeight: 1.3, letterSpacing: "0.04em", color: "rgba(245,245,240,0.9)", textShadow: "0 1px 50px rgba(0,0,0,0.65)" }}>
+        <h1 style={{ fontFamily: CORMORANT, fontWeight: 300, fontStyle: "italic", fontSize: "clamp(1.6rem, 3vw, 3.8rem)", lineHeight: 1.3, letterSpacing: "0.04em", color: "rgba(245,245,240,0.9)", textShadow: "0 1px 50px rgba(0,0,0,0.65)" }}>
           Every ride, handled with care.
-        </p>
+        </h1>
         <span style={{ display: "block", width: "2rem", height: "1px", background: "rgba(212,168,67,0.6)", margin: "0 auto" }} />
         <p style={{ fontFamily: "var(--font-sans)", fontWeight: 300, fontSize: "clamp(0.55rem, 0.9vw, 0.75rem)", letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(212,168,67,0.7)" }}>
           Singapore&rsquo;s trusted chauffeur service
