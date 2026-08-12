@@ -31,7 +31,7 @@ export function TestimonialsSection() {
   const { t } = useLanguage()
 
   return (
-    <section className="py-24 bg-background">
+    <section id="testimonials" className="py-24 bg-background scroll-mt-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="text-primary uppercase tracking-[0.3em] text-sm mb-4 font-medium">

@@ -109,7 +109,7 @@ export default function TermsPage() {
           </section>
 
           {/* Privacy Policy */}
-          <section className="mb-16">
+          <section id="privacy" className="mb-16 scroll-mt-28">
             <h2 className="font-serif text-2xl font-medium text-foreground mb-8 pb-3 border-b border-border">
               Privacy Policy
             </h2>
