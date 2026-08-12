@@ -17,19 +17,6 @@ const categoryMap: Record<string, string> = {
   'COACH': 'group',
 }
 
-type SanityVehicle = {
-  slug: string
-  name: string
-  nameZh?: string
-  category: string
-  passengers: number
-  luggage: number
-  description: string
-  descriptionZh?: string
-  features: string[]
-  featuresZh?: string[]
-}
-
 const cardVariants = {
   hidden: { opacity: 0, y: 36 },
   show: (i: number) => ({
@@ -40,7 +27,7 @@ const cardVariants = {
 }
 
 function FleetCard({ vehicle, index, lang, t }: {
-  vehicle: SanityVehicle
+  vehicle: Vehicle
   index: number
   lang: string
   t: { fleet: { viewDetails: string } }
@@ -149,7 +136,7 @@ function FleetCard({ vehicle, index, lang, t }: {
   )
 }
 
-export function FleetSection({ vehicles }: { vehicles: SanityVehicle[] }) {
+export function FleetSection({ vehicles }: { vehicles: Vehicle[] }) {
   const { lang, t } = useLanguage()
   const [activeCategory, setActiveCategory] = useState("all")
 

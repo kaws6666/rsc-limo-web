@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { getAllVehicles } from "@/sanity/lib/queries"
+import { getAllVehicles } from "@/lib/content"
 
 const SITE_URL = "https://rsclimo.com.sg"
 

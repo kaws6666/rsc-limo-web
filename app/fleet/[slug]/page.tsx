@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getAllVehicles, getVehicleBySlug, getSiteSettings } from "@/sanity/lib/queries"
+import { getAllVehicles, getVehicleBySlug, getSiteSettings } from "@/lib/content"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
