@@ -14,9 +14,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const vehicle = await getVehicleBySlug(slug)
   if (!vehicle) return {}
+  const title = `${vehicle.name} | Royal Stallion Chauffeurs Singapore`
   return {
-    title: `${vehicle.name} | Royal Stallion Chauffeurs Singapore`,
+    title,
     description: vehicle.description,
+    alternates: {
+      canonical: `/fleet/${slug}`,
+    },
+    openGraph: {
+      title,
+      description: vehicle.description,
+      url: `/fleet/${slug}`,
+      type: 'website',
+    },
   }
 }
 

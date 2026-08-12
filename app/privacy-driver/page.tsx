@@ -5,6 +5,9 @@ import { Footer } from "@/components/footer"
 export const metadata = {
   title: "Driver App Privacy Policy — Royal Stallion Chauffeurs",
   description: "Privacy policy for the RSC Driver mobile application, covering location tracking, data collection, and driver data rights.",
+  alternates: {
+    canonical: "/privacy-driver",
+  },
 }
 
 const lastUpdated = "4 June 2026"

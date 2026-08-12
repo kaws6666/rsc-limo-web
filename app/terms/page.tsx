@@ -5,6 +5,9 @@ import { Footer } from "@/components/footer"
 export const metadata = {
   title: "Terms & Conditions | Privacy Policy — Royal Stallion Chauffeurs",
   description: "Terms of Service and Privacy Policy for Royal Stallion Chauffeurs Pte. Ltd.",
+  alternates: {
+    canonical: "/terms",
+  },
 }
 
 const lastUpdated = "12 April 2026"
