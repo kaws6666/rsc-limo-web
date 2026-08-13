@@ -8,7 +8,7 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
-import { getAllVehicles } from "@/sanity/lib/queries"
+import { getAllVehicles } from "@/lib/content"
 
 export const metadata: Metadata = {
   alternates: {
