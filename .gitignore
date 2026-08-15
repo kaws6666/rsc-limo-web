@@ -14,3 +14,14 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
+# Local tooling artifacts
+.agents/
+.claude/settings.local.json
+skills-lock.json
+tsconfig.tsbuildinfo
+
+# Unused 56MB source video — nothing in the site references /videos/hero.mp4
+public/videos/
+
+# Downloaded template archive
+VercelTemplateRSC.zip
