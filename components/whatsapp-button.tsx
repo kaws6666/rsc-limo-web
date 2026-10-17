@@ -1,6 +1,6 @@
 "use client"
 
-const WA_LINK = "https://wa.me/6586860775?text=Hi%20RSC%20Limo%2C%20I%20would%20like%20to%20make%20a%20booking"
+const WA_LINK = "https://wa.me/6596194333?text=Hi%20RSC%20Limo%2C%20I%20would%20like%20to%20make%20a%20booking"
 
 export function WhatsAppButton() {
   return (

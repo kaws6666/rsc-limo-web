@@ -90,7 +90,7 @@ const structuredData = {
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/og-image.jpg`,
-  telephone: '+65-8686-0775',
+  telephone: '+65-9619-4333',
   priceRange: '$$$',
   areaServed: {
     '@type': 'Country',

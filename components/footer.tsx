@@ -48,9 +48,9 @@ export function Footer() {
               {t.footer.tagline}
             </p>
             <div className="space-y-3">
-              <a href="tel:+6586860775" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a href="tel:+6596194333" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>+65 8686 0775</span>
+                <span>+65 9619 4333</span>
               </a>
               <a href="mailto:hello@rsclimo.com.sg" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />

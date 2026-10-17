@@ -96,10 +96,10 @@ export function ContactSection() {
   }
 
   const contactInfo = [
-    { icon: Phone, label: t.contact.callUs, value: "+65 8686 0775", href: "tel:+6586860775" },
+    { icon: Phone, label: t.contact.callUs, value: "+65 9619 4333", href: "tel:+6596194333" },
     { icon: Mail, label: t.contact.emailUs, value: "hello@rsclimo.com.sg", href: "mailto:hello@rsclimo.com.sg" },
     { icon: Clock, label: t.contact.hours, value: t.contact.hoursValue, href: "#" },
-    { icon: WhatsAppIcon, label: t.contact.whatsapp, value: t.contact.whatsappValue, href: "https://wa.me/6586860775" },
+    { icon: WhatsAppIcon, label: t.contact.whatsapp, value: t.contact.whatsappValue, href: "https://wa.me/6596194333" },
   ]
 
   return (
