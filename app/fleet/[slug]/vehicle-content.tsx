@@ -31,7 +31,7 @@ export function VehicleContent({ vehicle, siteSettings }: { vehicle: Vehicle; si
   const tv = t.vehicle
 
   const waText = encodeURIComponent(`Hi RSC Limo, I would like to book the ${vehicle.name}`)
-  const waLink = `https://wa.me/6586860775?text=${waText}`
+  const waLink = `https://wa.me/6596194333?text=${waText}`
 
   const description = lang === "zh" && vehicle.descriptionZh ? vehicle.descriptionZh : vehicle.description
   const features = lang === "zh" && vehicle.featuresZh ? vehicle.featuresZh : vehicle.features
@@ -127,9 +127,9 @@ export function VehicleContent({ vehicle, siteSettings }: { vehicle: Vehicle; si
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-border text-foreground hover:bg-secondary gap-2">
-                  <a href="tel:+6586860775">
+                  <a href="tel:+6596194333">
                     <Phone className="w-5 h-5" />
-                    +65 8686 0775
+                    +65 9619 4333
                   </a>
                 </Button>
               </div>

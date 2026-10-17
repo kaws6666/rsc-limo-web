@@ -278,8 +278,8 @@ export function CinematicHeroSection() {
           <a href="#contact" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 hover:opacity-90 transition-opacity" style={{ background: "#D4A843", color: "#0A0A0A", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
             Book Your Ride <span aria-hidden>→</span>
           </a>
-          <a href="tel:+6586860775" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 border hover:bg-white/5 transition-colors" style={{ borderColor: "rgba(212,168,67,0.45)", color: "#F5F5F0", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
-            <span>📞</span> +65 8686 0775
+          <a href="tel:+6596194333" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 border hover:bg-white/5 transition-colors" style={{ borderColor: "rgba(212,168,67,0.45)", color: "#F5F5F0", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
+            <span>📞</span> +65 9619 4333
           </a>
         </div>
       </div>

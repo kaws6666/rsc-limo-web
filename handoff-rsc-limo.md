@@ -320,7 +320,7 @@ All text content is already on the live WordPress site — copy from there:
 - Services list
 - About Us copy
 - Testimonials
-- Contact details: `hello@rsclimo.com.sg` · `+65 8686 0775`
+- Contact details: `hello@rsclimo.com.sg` · `+65 9619 4333`
 - Footer: email, phone, Facebook (Instagram TBD — handle not ready)
 
 ### What Happens to WordPress
