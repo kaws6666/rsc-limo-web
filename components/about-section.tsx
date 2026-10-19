@@ -80,7 +80,7 @@ function AnimatedStat({
 
       <div>
         <p className="text-2xl font-serif font-medium text-foreground">
-          <span ref={numRef}>0{suffix}</span>
+          <span ref={numRef}>{num === 0 ? stat.value : `0${suffix}`}</span>
         </p>
         <p className="text-muted-foreground text-sm">{stat.label}</p>
       </div>
