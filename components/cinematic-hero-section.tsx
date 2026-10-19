@@ -12,7 +12,29 @@ const TOTAL    = 121;
 const DURATION = 5.04;
 
 function pad4(n: number) { return String(n).padStart(4, "0"); }
-function frameUrl(i: number) { return `/frames/frame_${pad4(i + 1)}.jpg`; }
+function frameUrl(i: number, lite: boolean) { return `/frames/${lite ? "m/" : ""}frame_${pad4(i + 1)}.webp`; }
+
+// Coarse-to-fine order so a half-loaded hero still scrubs smoothly.
+function loadOrder(lite: boolean) {
+  const seen = new Set<number>();
+  const order: number[] = [];
+  for (const stride of lite ? [16, 8, 4, 2] : [16, 8, 4, 2, 1]) {
+    for (let i = 0; i < TOTAL; i += stride) {
+      if (!seen.has(i)) { seen.add(i); order.push(i); }
+    }
+  }
+  return order;
+}
+
+function nearestLoaded(frames: (HTMLImageElement | undefined)[], idx: number) {
+  for (let d = 0; d < TOTAL; d++) {
+    const lo = frames[idx - d];
+    if (lo) return lo;
+    const hi = frames[idx + d];
+    if (hi) return hi;
+  }
+  return undefined;
+}
 
 function drawCover(
   ctx: CanvasRenderingContext2D,
@@ -33,7 +55,7 @@ function drawCover(
 export function CinematicHeroSection() {
   const heroRef     = useRef<HTMLElement>(null);
   const canvasRef   = useRef<HTMLCanvasElement>(null);
-  const framesRef   = useRef<HTMLImageElement[]>([]);
+  const framesRef   = useRef<(HTMLImageElement | undefined)[]>([]);
   const hintRef     = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const logoRef     = useRef<HTMLDivElement>(null);
@@ -46,38 +68,52 @@ export function CinematicHeroSection() {
   const [loadPct, setLoadPct] = useState(0);
   const [ready,   setReady]   = useState(false);
 
-  /* ── Load all frames in parallel ── */
+  /* ── Load frames progressively: first frame starts the hero, the rest stream in ── */
   useEffect(() => {
-    const imgs: HTMLImageElement[] = new Array(TOTAL);
-    let loaded = 0;
+    const frames: (HTMLImageElement | undefined)[] = new Array(TOTAL);
+    framesRef.current = frames;
+    let cancelled = false;
+
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lite = window.innerWidth < 768 || !!conn?.saveData || /^(slow-2g|2g|3g)$/.test(conn?.effectiveType ?? "");
 
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const cvs = canvasRef.current!;
     cvs.width  = Math.round(window.innerWidth  * dpr);
     cvs.height = Math.round(window.innerHeight * dpr);
 
-    const onOne = (img: HTMLImageElement, idx: number) => {
-      imgs[idx] = img;
-      loaded++;
-      setLoadPct(Math.round((loaded / TOTAL) * 100));
-      if (idx === 0) {
-        const ctx = cvs.getContext("2d");
-        if (ctx) drawCover(ctx, img, cvs.width, cvs.height);
-      }
-      if (loaded === TOTAL) { framesRef.current = imgs; setReady(true); }
-    };
+    const queue = reducedMotion ? [0] : loadOrder(lite);
+    let done = 0;
 
-    for (let i = 0; i < TOTAL; i++) {
+    const loadOne = (idx: number) => new Promise<void>((resolve) => {
       const img = new Image();
-      const idx  = i;
-      img.onload  = () => onOne(img, idx);
-      img.onerror = () => {
-        loaded++;
-        setLoadPct(Math.round((loaded / TOTAL) * 100));
-        if (loaded === TOTAL) { framesRef.current = imgs; setReady(true); }
+      img.onload = () => {
+        frames[idx] = img;
+        if (idx === 0) {
+          const ctx = cvs.getContext("2d");
+          if (ctx) drawCover(ctx, img, cvs.width, cvs.height);
+          if (!cancelled) setReady(true);
+        }
+        resolve();
       };
-      img.src = frameUrl(i);
-    }
+      img.onerror = () => resolve();
+      img.src = frameUrl(idx, lite);
+    }).then(() => {
+      done++;
+      if (!cancelled) setLoadPct(Math.round((done / queue.length) * 100));
+    });
+
+    (async () => {
+      await loadOne(queue[0]);
+      let next = 1;
+      const worker = async () => {
+        while (!cancelled && next < queue.length) await loadOne(queue[next++]);
+      };
+      await Promise.all(Array.from({ length: 6 }, worker));
+    })();
+
+    return () => { cancelled = true; };
   }, []);
 
   /* ── Scroll animation ── */
@@ -92,8 +128,18 @@ export function CinematicHeroSection() {
     const frames   = framesRef.current;
     const canvas   = canvasRef.current!;
     const ctx      = canvas.getContext("2d")!;
-    const cW       = canvas.width;
-    const cH       = canvas.height;
+    let cW         = canvas.width;
+    let cH         = canvas.height;
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+    const onResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        cW = canvas.width  = Math.round(window.innerWidth  * dpr);
+        cH = canvas.height = Math.round(window.innerHeight * dpr);
+      }, 150);
+    };
+    window.addEventListener("resize", onResize);
     const scrollVH = Math.round(Math.min(Math.max(DURATION * 40, 200), 450));
 
     gsap.set([card1Ref.current, card2Ref.current, card3Ref.current], { opacity: 0 });
@@ -114,23 +160,24 @@ export function CinematicHeroSection() {
       // Idle ambient drift — slowly advance through all frames on loop
       if (!isScrolling) {
         const delta = lastRafTs ? ts - lastRafTs : 0;
-        targetIdx = (targetIdx + (delta / 1000) * IDLE_FPS) % (frames.length - 1);
+        targetIdx = (targetIdx + (delta / 1000) * IDLE_FPS) % (TOTAL - 1);
       }
       lastRafTs = ts;
 
       // Cross-frame blend: fade between floor/ceil instead of hard Math.round jump
-      const lo  = Math.floor(Math.min(targetIdx, frames.length - 1));
-      const hi  = Math.min(lo + 1, frames.length - 1);
+      const lo  = Math.floor(Math.min(targetIdx, TOTAL - 1));
+      const hi  = Math.min(lo + 1, TOTAL - 1);
       const frac = targetIdx - lo;
 
-      const imgLo = frames[lo];
-      const imgHi = frames[hi];
+      // Frames still streaming in are replaced by their nearest loaded neighbour.
+      const imgLo = nearestLoaded(frames, lo);
+      const imgHi = nearestLoaded(frames, hi);
 
       if (imgLo?.complete) {
         ctx.globalAlpha = 1;
         drawCover(ctx, imgLo, cW, cH);
       }
-      if (frac > 0.01 && imgHi?.complete) {
+      if (frac > 0.01 && imgHi?.complete && imgHi !== imgLo) {
         ctx.globalAlpha = frac;
         drawCover(ctx, imgHi, cW, cH);
         ctx.globalAlpha = 1;
@@ -140,7 +187,7 @@ export function CinematicHeroSection() {
     };
     rafId = requestAnimationFrame(render);
 
-    if (reduced) return () => { cancelAnimationFrame(rafId); lenis.destroy(); };
+    if (reduced) return () => { cancelAnimationFrame(rafId); window.removeEventListener("resize", onResize); lenis.destroy(); };
 
     const gsapCtx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -196,6 +243,8 @@ export function CinematicHeroSection() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+      if (resizeTimer) clearTimeout(resizeTimer);
       if (scrollStopTimer) clearTimeout(scrollStopTimer);
       gsapCtx.revert();
       lenis.destroy();

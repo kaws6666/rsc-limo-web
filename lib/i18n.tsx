@@ -395,6 +395,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (saved === "en" || saved === "zh") setLangState(saved)
   }, [])
 
+  useEffect(() => {
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en"
+  }, [lang])
+
   const setLang = (l: Lang) => {
     setLangState(l)
     localStorage.setItem("rsc-lang", l)
