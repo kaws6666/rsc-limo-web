@@ -37,7 +37,7 @@ export function VehicleContent({ vehicle, siteSettings }: { vehicle: Vehicle; si
   const features = lang === "zh" && vehicle.featuresZh ? vehicle.featuresZh : vehicle.features
   const category = lang === "zh" && vehicle.categoryZh ? vehicle.categoryZh : vehicle.category
 
-  const vehicleImage = vehicleImages[vehicle.slug] ?? '/vehicles/alphard-photo.png'
+  const vehicleImage = vehicleImages[vehicle.slug] ?? '/vehicles/alphard-photo.webp'
 
   const translateService = (s: string) =>
     lang === "zh" ? (tv.serviceNames[s] ?? s) : s

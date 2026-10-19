@@ -90,8 +90,8 @@ export const translations = {
       stats: [
         { value: "24/7", label: "Service Availability" },
         { value: "500+", label: "Corporate Clients" },
-        { value: "10+", label: "Years Experience" },
-        { value: "100%", label: "Safety Record" },
+        { value: "5+", label: "Years Experience" },
+        { value: "Licensed", label: "Professional Chauffeurs" },
       ],
     },
 
@@ -271,8 +271,8 @@ export const translations = {
       stats: [
         { value: "24/7", label: "全天候服务" },
         { value: "500+", label: "企业客户" },
-        { value: "10+", label: "年行业经验" },
-        { value: "100%", label: "安全记录" },
+        { value: "5+", label: "年行业经验" },
+        { value: "持牌", label: "专业司机" },
       ],
     },
 
@@ -394,6 +394,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("rsc-lang") as Lang | null
     if (saved === "en" || saved === "zh") setLangState(saved)
   }, [])
+
+  useEffect(() => {
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en"
+  }, [lang])
 
   const setLang = (l: Lang) => {
     setLangState(l)

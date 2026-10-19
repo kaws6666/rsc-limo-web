@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!vehicle) return {}
   const title = `${vehicle.name} | Royal Stallion Chauffeurs Singapore`
   return {
-    title,
+    title: { absolute: title },
     description: vehicle.description,
     alternates: {
       canonical: `/fleet/${slug}`,

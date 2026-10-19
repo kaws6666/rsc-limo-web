@@ -12,7 +12,29 @@ const TOTAL    = 121;
 const DURATION = 5.04;
 
 function pad4(n: number) { return String(n).padStart(4, "0"); }
-function frameUrl(i: number) { return `/frames/frame_${pad4(i + 1)}.jpg`; }
+function frameUrl(i: number, lite: boolean) { return `/frames/${lite ? "m/" : ""}frame_${pad4(i + 1)}.webp`; }
+
+// Coarse-to-fine order so a half-loaded hero still scrubs smoothly.
+function loadOrder(lite: boolean) {
+  const seen = new Set<number>();
+  const order: number[] = [];
+  for (const stride of lite ? [16, 8, 4, 2] : [16, 8, 4, 2, 1]) {
+    for (let i = 0; i < TOTAL; i += stride) {
+      if (!seen.has(i)) { seen.add(i); order.push(i); }
+    }
+  }
+  return order;
+}
+
+function nearestLoaded(frames: (HTMLImageElement | undefined)[], idx: number) {
+  for (let d = 0; d < TOTAL; d++) {
+    const lo = frames[idx - d];
+    if (lo) return lo;
+    const hi = frames[idx + d];
+    if (hi) return hi;
+  }
+  return undefined;
+}
 
 function drawCover(
   ctx: CanvasRenderingContext2D,
@@ -33,7 +55,7 @@ function drawCover(
 export function CinematicHeroSection() {
   const heroRef     = useRef<HTMLElement>(null);
   const canvasRef   = useRef<HTMLCanvasElement>(null);
-  const framesRef   = useRef<HTMLImageElement[]>([]);
+  const framesRef   = useRef<(HTMLImageElement | undefined)[]>([]);
   const hintRef     = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const logoRef     = useRef<HTMLDivElement>(null);
@@ -43,41 +65,54 @@ export function CinematicHeroSection() {
   const ctaRef      = useRef<HTMLDivElement>(null);
   const fadeRef     = useRef<HTMLDivElement>(null);
 
-  const [loadPct, setLoadPct] = useState(0);
+  const loadedTick = useRef(0);
   const [ready,   setReady]   = useState(false);
 
-  /* ── Load all frames in parallel ── */
+  /* ── Load frames progressively: first frame starts the hero, the rest stream in ── */
   useEffect(() => {
-    const imgs: HTMLImageElement[] = new Array(TOTAL);
-    let loaded = 0;
+    const frames: (HTMLImageElement | undefined)[] = new Array(TOTAL);
+    framesRef.current = frames;
+    let cancelled = false;
+
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lite = window.innerWidth < 768 || !!conn?.saveData || /^(slow-2g|2g|3g)$/.test(conn?.effectiveType ?? "");
 
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const cvs = canvasRef.current!;
     cvs.width  = Math.round(window.innerWidth  * dpr);
     cvs.height = Math.round(window.innerHeight * dpr);
 
-    const onOne = (img: HTMLImageElement, idx: number) => {
-      imgs[idx] = img;
-      loaded++;
-      setLoadPct(Math.round((loaded / TOTAL) * 100));
-      if (idx === 0) {
-        const ctx = cvs.getContext("2d");
-        if (ctx) drawCover(ctx, img, cvs.width, cvs.height);
-      }
-      if (loaded === TOTAL) { framesRef.current = imgs; setReady(true); }
-    };
+    const queue = reducedMotion ? [0] : loadOrder(lite);
 
-    for (let i = 0; i < TOTAL; i++) {
+    const loadOne = (idx: number) => new Promise<void>((resolve) => {
       const img = new Image();
-      const idx  = i;
-      img.onload  = () => onOne(img, idx);
-      img.onerror = () => {
-        loaded++;
-        setLoadPct(Math.round((loaded / TOTAL) * 100));
-        if (loaded === TOTAL) { framesRef.current = imgs; setReady(true); }
+      img.onload = async () => {
+        // Decode off the main thread now so the first draw of a frame never stalls scrolling.
+        try { await img.decode?.(); } catch { /* draw anyway */ }
+        frames[idx] = img;
+        loadedTick.current++;
+        if (idx === 0) {
+          const ctx = cvs.getContext("2d");
+          if (ctx) drawCover(ctx, img, cvs.width, cvs.height);
+          if (!cancelled) setReady(true);
+        }
+        resolve();
       };
-      img.src = frameUrl(i);
-    }
+      img.onerror = () => resolve();
+      img.src = frameUrl(idx, lite);
+    });
+
+    (async () => {
+      await loadOne(queue[0]);
+      let next = 1;
+      const worker = async () => {
+        while (!cancelled && next < queue.length) await loadOne(queue[next++]);
+      };
+      await Promise.all(Array.from({ length: 6 }, worker));
+    })();
+
+    return () => { cancelled = true; };
   }, []);
 
   /* ── Scroll animation ── */
@@ -86,14 +121,25 @@ export function CinematicHeroSection() {
 
     const reduced  = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lenis    = new Lenis({ lerp: 0.08 });
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    const lenisTick = (t: number) => lenis.raf(t * 1000);
+    gsap.ticker.add(lenisTick);
     gsap.ticker.lagSmoothing(0);
 
     const frames   = framesRef.current;
     const canvas   = canvasRef.current!;
     const ctx      = canvas.getContext("2d")!;
-    const cW       = canvas.width;
-    const cH       = canvas.height;
+    let cW         = canvas.width;
+    let cH         = canvas.height;
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+    const onResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        cW = canvas.width  = Math.round(window.innerWidth  * dpr);
+        cH = canvas.height = Math.round(window.innerHeight * dpr);
+      }, 150);
+    };
+    window.addEventListener("resize", onResize);
     const scrollVH = Math.round(Math.min(Math.max(DURATION * 40, 200), 450));
 
     gsap.set([card1Ref.current, card2Ref.current, card3Ref.current], { opacity: 0 });
@@ -104,49 +150,66 @@ export function CinematicHeroSection() {
 
     const t = (pct: number) => DURATION * pct;
 
-    let rafId = 0, targetIdx = 0, lastRafTs = 0;
+    let targetIdx = 0, displayIdx = 0, drift = 1, lastTime = 0;
+    let lastDrawn = -1, lastLoadedTick = -1;
+    let heroActive = true;
     let isScrolling = false;
     let scrollStopTimer: ReturnType<typeof setTimeout> | null = null;
 
     const IDLE_FPS = 4; // frames per second when no scroll input
+    const SMOOTHING = 9; // higher = snappier follow of the scroll position
 
-    const render = (ts: number = 0) => {
-      // Idle ambient drift — slowly advance through all frames on loop
-      if (!isScrolling) {
-        const delta = lastRafTs ? ts - lastRafTs : 0;
-        targetIdx = (targetIdx + (delta / 1000) * IDLE_FPS) % (frames.length - 1);
-      }
-      lastRafTs = ts;
+    const draw = () => {
+      const lo  = Math.floor(Math.min(displayIdx, TOTAL - 1));
+      const hi  = Math.min(lo + 1, TOTAL - 1);
+      const frac = displayIdx - lo;
 
-      // Cross-frame blend: fade between floor/ceil instead of hard Math.round jump
-      const lo  = Math.floor(Math.min(targetIdx, frames.length - 1));
-      const hi  = Math.min(lo + 1, frames.length - 1);
-      const frac = targetIdx - lo;
-
-      const imgLo = frames[lo];
-      const imgHi = frames[hi];
+      // Frames still streaming in are replaced by their nearest loaded neighbour.
+      const imgLo = nearestLoaded(frames, lo);
+      const imgHi = nearestLoaded(frames, hi);
 
       if (imgLo?.complete) {
         ctx.globalAlpha = 1;
         drawCover(ctx, imgLo, cW, cH);
       }
-      if (frac > 0.01 && imgHi?.complete) {
+      if (frac > 0.01 && imgHi?.complete && imgHi !== imgLo) {
         ctx.globalAlpha = frac;
         drawCover(ctx, imgHi, cW, cH);
         ctx.globalAlpha = 1;
       }
-
-      rafId = requestAnimationFrame(render);
     };
-    rafId = requestAnimationFrame(render);
 
-    if (reduced) return () => { cancelAnimationFrame(rafId); lenis.destroy(); };
+    // One shared ticker drives Lenis, the scrub and the canvas, so they never disagree within a frame.
+    const tick = (time: number) => {
+      const dt = lastTime ? Math.min(time - lastTime, 0.1) : 0;
+      lastTime = time;
+      if (!heroActive || document.hidden) return;
+
+      if (!isScrolling && !reduced) {
+        // Ambient drift ping-pongs: the clip isn't a seamless loop, so wrapping 120 -> 0 would cut.
+        targetIdx += drift * dt * IDLE_FPS;
+        if (targetIdx >= TOTAL - 1) { targetIdx = TOTAL - 1; drift = -1; }
+        else if (targetIdx <= 0) { targetIdx = 0; drift = 1; }
+      }
+
+      displayIdx += (targetIdx - displayIdx) * (1 - Math.exp(-dt * SMOOTHING));
+
+      // Skip the (expensive) full-canvas redraw when nothing visible changed.
+      if (Math.abs(displayIdx - lastDrawn) < 0.002 && lastLoadedTick === loadedTick.current) return;
+      lastDrawn = displayIdx;
+      lastLoadedTick = loadedTick.current;
+      draw();
+    };
+    gsap.ticker.add(tick);
+
+    if (reduced) return () => { gsap.ticker.remove(tick); gsap.ticker.remove(lenisTick); window.removeEventListener("resize", onResize); lenis.destroy(); };
 
     const gsapCtx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
-          pin: true, scrub: 0.3,
+          pin: true, scrub: 0.5,
+          onToggle(self) { heroActive = self.isActive; },
           start: "top top",
           end: `+=${scrollVH}%`,
           anticipatePin: 1,
@@ -195,7 +258,10 @@ export function CinematicHeroSection() {
     });
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tick);
+      gsap.ticker.remove(lenisTick);
+      window.removeEventListener("resize", onResize);
+      if (resizeTimer) clearTimeout(resizeTimer);
       if (scrollStopTimer) clearTimeout(scrollStopTimer);
       gsapCtx.revert();
       lenis.destroy();
@@ -219,15 +285,8 @@ export function CinematicHeroSection() {
             Preparing experience
           </p>
           <div style={{ width: 200, height: 1, background: "rgba(212,168,67,0.12)", position: "relative" }}>
-            <div style={{
-              position: "absolute", inset: 0, background: "#D4A843",
-              transformOrigin: "left", transform: `scaleX(${loadPct / 100})`,
-              transition: "transform 0.1s linear",
-            }} />
+            <div className="animate-pulse" style={{ position: "absolute", inset: 0, background: "#D4A843", transformOrigin: "left", transform: "scaleX(0.4)" }} />
           </div>
-          <p style={{ color: "rgba(212,168,67,0.3)", fontSize: "0.58rem", letterSpacing: "0.3em", marginTop: "1rem" }}>
-            {loadPct}%
-          </p>
         </div>
       )}
 
