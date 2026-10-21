@@ -23,6 +23,7 @@ const footerFleet = [
 const footerCompany = [
   { label: "About Us", labelZh: "关于我们", href: "/#about" },
   { label: "Our Fleet", labelZh: "我们的车队", href: "/#fleet" },
+  { label: "Our Partners", labelZh: "合作伙伴", href: "/partners" },
   { label: "Testimonials", labelZh: "客户评价", href: "/#testimonials" },
   { label: "Contact", labelZh: "联系我们", href: "/#contact" },
   { label: "Terms & Conditions", labelZh: "条款与条件", href: "/terms" },

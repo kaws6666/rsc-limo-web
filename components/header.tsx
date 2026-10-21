@@ -43,6 +43,7 @@ export function Header() {
     { href: isHome ? "#services" : "/#services", label: t.nav.services },
     { href: isHome ? "#fleet" : "/#fleet", label: t.nav.fleet },
     { href: isHome ? "#about" : "/#about", label: t.nav.about },
+    { href: "/partners", label: t.nav.partners },
     { href: isHome ? "#contact" : "/#contact", label: t.nav.contact },
   ]
 
