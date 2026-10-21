@@ -11,6 +11,7 @@ export const translations = {
       services: "Services",
       fleet: "Our Fleet",
       about: "About",
+      partners: "Partners",
       contact: "Contact",
       getQuote: "Get Quote",
     },
@@ -90,7 +91,7 @@ export const translations = {
       stats: [
         { value: "24/7", label: "Service Availability" },
         { value: "500+", label: "Corporate Clients" },
-        { value: "5+", label: "Years Experience" },
+        { value: "Since 2023", label: "Serving Singapore" },
         { value: "Licensed", label: "Professional Chauffeurs" },
       ],
     },
@@ -200,6 +201,7 @@ export const translations = {
       services: "服务项目",
       fleet: "我们的车队",
       about: "关于我们",
+      partners: "合作伙伴",
       contact: "联系我们",
       getQuote: "立即询价",
     },
@@ -271,7 +273,7 @@ export const translations = {
       stats: [
         { value: "24/7", label: "全天候服务" },
         { value: "500+", label: "企业客户" },
-        { value: "5+", label: "年行业经验" },
+        { value: "自2023年", label: "服务新加坡" },
         { value: "持牌", label: "专业司机" },
       ],
     },

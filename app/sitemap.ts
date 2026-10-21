@@ -20,6 +20,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...vehicleEntries,
     {
+      url: `${SITE_URL}/partners`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${SITE_URL}/terms`,
       changeFrequency: "yearly",
       priority: 0.3,
