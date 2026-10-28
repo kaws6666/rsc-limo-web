@@ -9,6 +9,9 @@ import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { getAllVehicles } from "@/lib/content"
+import { FaqSection } from "@/components/faq-section"
+import { HOME_FAQS } from "@/lib/faq-data"
+import { JsonLd, faqJsonLd } from "@/lib/seo"
 
 export const metadata: Metadata = {
   alternates: {
@@ -21,12 +24,14 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd data={faqJsonLd(HOME_FAQS)} />
       <Header />
       <CinematicHeroSection />
       <ServicesSection />
       <FleetSection vehicles={vehicles} />
       <AboutSection />
       <TestimonialsSection />
+      <FaqSection faqs={HOME_FAQS} />
       <ContactSection />
       <Footer />
       <WhatsAppButton />

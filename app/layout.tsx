@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Inter, Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { LanguageProvider } from '@/lib/i18n'
+import { BUSINESS_ID } from '@/lib/seo'
+import { LANDING_PAGES } from '@/lib/landing-pages'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -21,7 +23,7 @@ const cormorant = Cormorant_Garamond({
 
 const SITE_URL = 'https://rsclimo.com.sg'
 const SITE_TITLE = 'Royal Stallion Chauffeurs | Premium Limousine Service Singapore'
-const SITE_DESCRIPTION = "Singapore's premier chauffeur and limousine service. Luxury fleet including Mercedes S-Class, E-Class, V-Class, Toyota Alphard/Vellfire, and coach services for corporate, airport transfers, and events."
+const SITE_DESCRIPTION = "Private chauffeur and limousine service in Singapore: Changi Airport transfers, corporate travel, weddings and hourly hire. S-Class, Alphard and coaches. 24/7."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -84,24 +86,58 @@ export const metadata: Metadata = {
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Royal Stallion Chauffeurs',
-  alternateName: 'RSC Limo',
-  url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
-  image: `${SITE_URL}/og-image.jpg`,
-  telephone: '+65-9619-4333',
-  priceRange: '$$$',
-  areaServed: {
-    '@type': 'Country',
-    name: 'Singapore',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'SG',
-  },
-  sameAs: ['https://www.facebook.com/rsclimousine'],
-  description: SITE_DESCRIPTION,
+  '@graph': [
+    {
+      '@type': 'LocalBusiness',
+      '@id': BUSINESS_ID,
+      name: 'Royal Stallion Chauffeurs',
+      alternateName: 'RSC Limo',
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.png`,
+      image: `${SITE_URL}/og-image.jpg`,
+      telephone: '+65-9619-4333',
+      email: 'hello@rsclimo.com.sg',
+      priceRange: '$$$',
+      description: SITE_DESCRIPTION,
+      knowsLanguage: ['en', 'zh'],
+      areaServed: [
+        { '@type': 'Country', name: 'Singapore' },
+        { '@type': 'Airport', name: 'Singapore Changi Airport', iataCode: 'SIN' },
+      ],
+      address: { '@type': 'PostalAddress', addressCountry: 'SG' },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+65-9619-4333',
+        email: 'hello@rsclimo.com.sg',
+        contactType: 'reservations',
+        areaServed: 'SG',
+        availableLanguage: ['English', 'Chinese'],
+      },
+      sameAs: ['https://www.facebook.com/rsclimousine'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Chauffeur services in Singapore',
+        itemListElement: LANDING_PAGES.map((p) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: p.h1, url: `${SITE_URL}/${p.slug}` },
+        })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'Royal Stallion Chauffeurs',
+      inLanguage: 'en-SG',
+      publisher: { '@id': BUSINESS_ID },
+    },
+  ],
 }
 
 export default function RootLayout({
@@ -110,7 +146,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-SG">
       <body className={`${playfair.variable} ${inter.variable} ${cormorant.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
