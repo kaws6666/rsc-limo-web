@@ -7,6 +7,16 @@ import { useState } from "react"
 
 const icons = [Plane, Briefcase, Calendar, Users, Building, MapPin]
 
+// Same order as t.services.items: airport, corporate, events, group, B2B, city tours.
+const serviceLinks = [
+  "/airport-transfer-singapore",
+  "/corporate-chauffeur-singapore",
+  "/wedding-chauffeur-singapore",
+  "/group-transport-singapore",
+  "/corporate-chauffeur-singapore",
+  "/hourly-chauffeur-singapore",
+]
+
 const cardVariants = {
   hidden: { opacity: 0, x: -60 },
   show: (i: number) => ({
@@ -19,11 +29,14 @@ function ServiceCard({
   service,
   icon: Icon,
   index,
+  href,
 }: {
   service: { title: string; description: string }
   icon: React.ElementType
   index: number
+  href: string
 }) {
+  const { lang } = useLanguage()
   const [hovered, setHovered] = useState(false)
 
   // Staggered float: each card floats at a different phase
@@ -74,6 +87,12 @@ function ServiceCard({
           {service.title}
         </h3>
         <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
+        <a
+          href={href}
+          className="mt-5 inline-block text-sm text-primary hover:underline after:absolute after:inset-0 after:content-['']"
+        >
+          {lang === "zh" ? "了解更多 →" : "Learn more →"}
+        </a>
       </div>
     </motion.div>
   )
@@ -105,7 +124,7 @@ export function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {t.services.items.map((service, i) => (
-            <ServiceCard key={service.title} service={service} icon={icons[i]} index={i} />
+            <ServiceCard key={service.title} service={service} icon={icons[i]} index={i} href={serviceLinks[i]} />
           ))}
         </div>
       </div>

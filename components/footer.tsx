@@ -4,11 +4,11 @@ import { Phone, Mail, Facebook } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 
 const footerServices = [
-  { label: "Airport Transfers", labelZh: "机场接送", href: "/#services" },
-  { label: "Corporate Travel", labelZh: "企业商务出行", href: "/#services" },
-  { label: "Events & Weddings", labelZh: "活动与婚礼", href: "/#services" },
-  { label: "Group Transport", labelZh: "团体运输", href: "/#services" },
-  { label: "City Tours", labelZh: "城市观光", href: "/#services" },
+  { label: "Airport Transfers", labelZh: "机场接送", href: "/airport-transfer-singapore" },
+  { label: "Corporate Chauffeur", labelZh: "企业商务出行", href: "/corporate-chauffeur-singapore" },
+  { label: "Events & Weddings", labelZh: "活动与婚礼", href: "/wedding-chauffeur-singapore" },
+  { label: "Hourly Chauffeur", labelZh: "按小时包车", href: "/hourly-chauffeur-singapore" },
+  { label: "Group Transport", labelZh: "团体运输", href: "/group-transport-singapore" },
 ]
 
 const footerFleet = [

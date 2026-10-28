@@ -396,7 +396,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en"
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en-SG"
   }, [lang])
 
   const setLang = (l: Lang) => {
