@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { Phone } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -338,7 +339,7 @@ export function CinematicHeroSection() {
             Book Your Ride <span aria-hidden>→</span>
           </a>
           <a href="tel:+6596194333" className="inline-flex items-center justify-center gap-3 font-medium px-14 py-5 border hover:bg-white/5 transition-colors" style={{ borderColor: "rgba(212,168,67,0.45)", color: "#F5F5F0", fontSize: "0.95rem", letterSpacing: "0.04em" }}>
-            <span>📞</span> +65 9619 4333
+            <Phone className="w-4 h-4" style={{ color: "#D4A843" }} aria-hidden="true" /> +65 9619 4333
           </a>
         </div>
       </div>
