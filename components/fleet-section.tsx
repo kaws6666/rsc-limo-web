@@ -193,7 +193,8 @@ export function FleetSection({ vehicles }: { vehicles: Vehicle[] }) {
         </div>
 
         {/* Grid — AnimatePresence handles filter transitions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* A lone last card would sit hard-left; centre it on its row instead. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:max-lg:[&>*:last-child:nth-child(odd)]:col-span-2 md:max-lg:[&>*:last-child:nth-child(odd)]:justify-self-center md:max-lg:[&>*:last-child:nth-child(odd)]:w-[calc(50%-1rem)] lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
           <AnimatePresence mode="popLayout">
             {filteredFleet.map((vehicle, i) => (
               <FleetCard
