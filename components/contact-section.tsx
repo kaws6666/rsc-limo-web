@@ -174,6 +174,7 @@ export function ContactSection() {
                         <option value="">{t.contact.selectService}</option>
                         <option value="airport">{t.contact.serviceAirport}</option>
                         <option value="corporate">{t.contact.serviceCorporate}</option>
+                        <option value="hourly">{t.contact.serviceHourly}</option>
                         <option value="events">{t.contact.serviceEvents}</option>
                         <option value="group">{t.contact.serviceGroup}</option>
                         <option value="tour">{t.contact.serviceTour}</option>

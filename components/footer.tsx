@@ -17,6 +17,7 @@ const footerFleet = [
   { label: "Mercedes E-Class", href: "/fleet/mercedes-e-class" },
   { label: "Mercedes V-Class", href: "/fleet/mercedes-v-class" },
   { label: "Toyota Hiace (13-Seater)", labelZh: "丰田海狮（13座）", href: "/fleet/toyota-hiace" },
+  { label: "20-Seater Mini Coach", labelZh: "20座迷你巴士", href: "/fleet/mini-coach-bus" },
   { label: "40-Seater Coach", labelZh: "40座豪华巴士", href: "/fleet/40-seater-bus" },
 ]
 
